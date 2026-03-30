@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YTRF02 — Screen Plan v3 (2026-03-29 upd)</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Montserrat:wght@300;400;600;700;800&family=Raleway:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* RYA.AE document style */
+    --bg: #0D1526; --panel: #121E33; --accent: #D4E44B; --accent2: #7BA4D4;
+    --white: #FFF; --blue: #7BA4D4; --card: #1C2D42; --muted: #8899AA;
+    --border: rgba(123,164,212,.15); --accent-grad: linear-gradient(135deg,#D4E44B,#7BA4D4);
+    --err: #E05555; --warn: #F59E0B; --ok: #4ADE80; --purple: #6B5CE7;
+    /* YTRF channel style (for mocks inside) */
+    --ytrf-accent: #01E8AB; --ytrf-accent2: #29A6CB;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Montserrat',system-ui,sans-serif;background:var(--bg);color:var(--white);font-size:15px;line-height:1.6}
+
+  .hdr{position:sticky;top:0;z-index:100;background:var(--panel);border-bottom:1px solid var(--border);padding:14px 40px;display:flex;align-items:center;justify-content:space-between}
+  .hdr-left{display:flex;align-items:center;gap:20px}
+  .logo{font-family:'Orbitron',sans-serif;font-size:22px;font-weight:900;background:var(--accent-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:2px;text-transform:uppercase}
+  .hdr-title{font-size:16px;font-weight:300;color:var(--muted);border-left:1px solid var(--border);padding-left:20px}
+  .hdr-right{display:flex;align-items:center;gap:16px}
+  .hdr-badge{font-size:12px;font-weight:700;color:var(--bg);background:var(--accent-grad);padding:5px 14px;border-radius:14px;font-family:'Montserrat',system-ui,sans-serif;white-space:nowrap}
+  .hdr-meta{display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+  .hdr-version{font-size:13px;font-weight:700;color:var(--white);font-family:'Montserrat',system-ui,sans-serif}
+  .hdr-date{font-size:11px;color:var(--muted);font-weight:300}
+  .hdr-brand{font-size:12px;color:var(--white);font-weight:300}
+  .hdr-brand a{color:var(--white);text-decoration:none;font-weight:700;letter-spacing:.5px}
+  .hdr-brand a:hover{text-decoration:underline}
+
+  .content{padding:40px;max-width:1600px;margin:0 auto}
+
+  .summary{display:flex;gap:12px;margin-bottom:32px;flex-wrap:wrap}
+  .sum-card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px 18px;text-align:center;flex:1;min-width:120px}
+  .sum-num{font-size:28px;font-weight:800;color:var(--accent)}
+  .sum-label{font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
+
+  .legend{display:flex;gap:18px;margin-bottom:20px;flex-wrap:wrap}
+  .leg-item{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--muted);font-weight:600}
+  .leg-dot{width:14px;height:14px;border-radius:4px;flex-shrink:0}
+
+  .timeline{position:relative;height:52px;background:var(--panel);border-radius:10px;margin-bottom:40px;overflow:hidden;border:1px solid var(--border)}
+  .tl-seg{position:absolute;top:0;height:100%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:rgba(255,255,255,.9);cursor:pointer;transition:filter .2s;border-right:1px solid rgba(0,0,0,.3)}
+  .tl-seg:hover{filter:brightness(1.3)}
+  .tl-seg span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 4px}
+
+  .block-sep{display:flex;align-items:center;gap:14px;padding:12px 24px;margin:36px 0 16px;border-radius:10px;font-family:'Orbitron',sans-serif;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+  .block-dur{font-size:12px;font-weight:400;opacity:.7}
+
+  .seg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin-bottom:20px;border-radius:14px;overflow:hidden;border:1px solid var(--border);background:var(--panel);transition:border-color .2s;scroll-margin-top:70px}
+  .seg:hover{border-color:rgba(1,232,171,.3)}
+  .seg-left{padding:20px 24px;border-right:1px solid var(--border)}
+  .seg-right{padding:20px 24px;background:#0A1520;border-right:1px solid rgba(91,196,214,.15);
+    /* YTRF DNA — all channel colors for mocks */
+    --bg:#0A1520;--panel:#0F1F2D;--card:#142836;--accent:#01E8AB;--accent2:#29A6CB;
+    --accent-grad:linear-gradient(135deg,#01E8AB,#29A6CB);--white:#FFF;--blue:#5BC4D6;
+    --muted:#7E99A8;--border:rgba(91,196,214,.15);--err:#E05555;--ok:#4ADE80;
+    font-family:'Raleway',system-ui,sans-serif}
+  .seg-prod{padding:16px 18px;background:rgba(107,92,231,.03);overflow-y:auto;max-height:700px;font-size:12px}
+  .seg-prod::-webkit-scrollbar{width:4px}
+  .seg-prod::-webkit-scrollbar-thumb{background:rgba(107,92,231,.3);border-radius:2px}
+  .prod-label{font-size:9px;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+
+  .seg-meta{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+  .seg-num{font-size:13px;font-weight:700;color:var(--accent);background:rgba(1,232,171,.1);padding:3px 10px;border-radius:5px;font-family:monospace;letter-spacing:.5px}
+  .seg-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+  .seg-tc{font-size:12px;color:var(--muted);font-family:monospace}
+  .seg-dur{font-size:12px;color:var(--accent);font-weight:700;margin-left:4px}
+  .seg-title{font-size:17px;font-weight:700;margin-bottom:10px;line-height:1.3}
+  .seg-transcript{font-size:14px;color:rgba(255,255,255,.75);line-height:1.9;padding-right:8px}
+
+  .med-term{color:var(--accent2);font-weight:600;border-bottom:1px dotted rgba(41,166,203,.4);cursor:help}
+  .cue{display:inline-block;background:rgba(1,232,171,.12);color:var(--accent);font-size:10px;font-weight:700;letter-spacing:.5px;padding:1px 7px;border-radius:4px;margin:0 2px;vertical-align:middle;white-space:nowrap;border:1px solid rgba(1,232,171,.25)}
+  .cue-add{background:rgba(41,166,203,.12);color:var(--accent2);border-color:rgba(41,166,203,.25)}
+  .cue-off{background:rgba(224,85,85,.1);color:var(--err);border-color:rgba(224,85,85,.2)}
+
+  .scr-label{font-size:11px;color:var(--blue);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px}
+  .scr-preset{font-size:12px;color:var(--muted);margin-bottom:12px}
+  .scr-link{display:inline-block;margin-left:8px;font-size:10px;color:var(--muted);background:var(--card);padding:2px 8px;border-radius:4px;text-decoration:none;border:1px solid var(--border);cursor:pointer}
+  .scr-link:hover{color:var(--accent);border-color:var(--accent)}
+  .scr-link.copied{color:var(--ok);border-color:var(--ok)}
+
+  .ref-block{background:rgba(245,158,11,.05);border-left:3px solid var(--warn);border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:12px}
+  .ref-block::before{content:"РЕФЕРЕНС / КАК ВЫГЛЯДИТ";display:block;font-size:9px;font-weight:700;color:var(--warn);margin-bottom:6px;letter-spacing:1px}
+  .ref-block p{font-size:12px;color:rgba(255,255,255,.75);line-height:1.6;margin-bottom:4px}
+  .ref-block a{color:var(--accent2);text-decoration:underline}
+  .ref-block a:hover{color:var(--accent)}
+
+  .mock{width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;border:1px solid var(--border);position:relative;margin-bottom:14px;font-family:'Raleway',system-ui,sans-serif}
+
+  .m-th{height:100%}.m-th .spk{height:100%}
+  .spk{background:repeating-conic-gradient(#444 0% 25%,#555 0% 50%) 0 0/16px 16px;display:flex;align-items:center;justify-content:center;position:relative}
+  .spk::after{content:'СПИКЕР';font-size:14px;font-weight:700;color:rgba(255,255,255,.6);letter-spacing:4px;background:rgba(0,0,0,.6);padding:8px 24px;border-radius:8px;position:absolute}
+
+  /* Speaker Intro — flat bottom bar */
+  .m-si{height:100%;display:flex;flex-direction:column}
+  .m-si .spk{flex:1}
+  .m-si-bar{background:rgba(10,21,32,.92);border-top:3px solid var(--accent);padding:14px 28px;display:flex;align-items:center;gap:16px}
+  .m-si-photo{width:46px;height:46px;border-radius:50%;background:var(--card);border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+  .m-si-info{flex:1}
+  .m-si-info h3{font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px}
+  .m-si-info p{font-size:12px;font-weight:300;color:var(--muted)}
+  .m-si-logo{width:44px;height:44px;border-radius:8px;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--muted);flex-shrink:0;text-align:center;line-height:1.1;font-weight:700}
+
+  .m-disc{background:rgba(0,0,0,.85);height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 28px;text-align:center;gap:10px}
+  .m-disc h2{font-size:16px;font-weight:900;color:var(--err);text-transform:uppercase;letter-spacing:4px}
+  .m-disc p{font-size:9px;color:rgba(255,255,255,.7);line-height:1.6;max-width:380px}
+
+  .m-ss{display:grid;grid-template-columns:50% 50%;height:100%}
+  .m-ss-l{background:var(--panel);padding:18px 20px;display:flex;flex-direction:column;justify-content:center}
+  .m-ss-l h3{font-size:14px;font-weight:700;margin-bottom:8px;color:var(--accent)}
+  .m-ss-l ul{list-style:none}
+  .m-ss-l li{font-size:12px;padding:3px 0;color:rgba(255,255,255,.85)}
+  .m-ss-l li::before{content:"\2713  ";color:var(--accent);font-weight:700}
+  .m-ss-l li.dim{opacity:.3}
+  .m-ss-l .add{font-size:11px;color:var(--muted);margin-top:8px;font-style:italic}
+
+  .m-2p{background:var(--bg);padding:24px 28px;display:flex;flex-direction:column;height:100%}
+  .m-2p h3{font-size:16px;text-align:center;margin-bottom:12px;font-weight:700}
+  .m-2p-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;flex:1}
+  .m-2p-col{border:1px solid var(--border);border-radius:8px;padding:14px 16px;background:rgba(20,40,54,.5)}
+  .m-2p-col h4{font-size:12px;font-weight:700;color:var(--accent);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
+  .m-2p-col p{font-size:11px;color:rgba(255,255,255,.7);line-height:1.5}
+
+  .m-fp{background:var(--bg);display:flex;align-items:center;justify-content:center;gap:8px;height:100%;padding:16px;flex-wrap:wrap;position:relative}
+  .fp-node{min-width:65px;height:55px;border:2px solid var(--white);border-radius:10px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:9px;font-weight:600;line-height:1.3;padding:4px}
+  .fp-arrow{font-size:18px;color:var(--accent);font-weight:700}
+  .fp-sub{font-size:7px;color:var(--muted);text-align:center;margin-top:2px;max-width:65px}
+
+  .m-broll{background:linear-gradient(135deg,var(--panel) 0%,var(--bg) 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;height:100%}
+  .m-broll .br-icon{font-size:32px;opacity:.4}
+  .m-broll .br-text{font-size:11px;color:rgba(255,255,255,.4);text-align:center;padding:0 20px;line-height:1.5}
+
+  .m-steps{background:var(--bg);display:flex;align-items:center;justify-content:center;gap:16px;height:100%;padding:24px}
+  .step-card{background:var(--card);border-radius:14px;padding:14px 18px;flex:1;max-width:180px;min-height:90px;display:flex;flex-direction:column;border:1px solid var(--border);transition:.2s}
+  .step-card.active{border-color:rgba(1,232,171,.4)}
+  .step-card.future{opacity:.3}
+  .step-card.done{opacity:.5}
+  .step-lbl{font-size:12px;font-weight:700;color:var(--accent);margin-bottom:4px}
+  .step-card.done .step-lbl{color:var(--muted)}
+  hr.step-sep{width:100%;height:0;border:none;border-top:2px solid rgba(255,255,255,.15);margin:4px 0}
+  .step-txt{font-size:13px;color:var(--white);font-weight:600}
+  .step-card.done .step-txt::after{content:" \2713";color:var(--accent)}
+
+  .m-ig{background:linear-gradient(180deg,var(--bg),var(--panel));display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:20px;padding:24px}
+  .ig-row{display:flex;gap:24px}
+  .ig-card{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .ig-box{width:90px;height:70px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;opacity:.8}
+  .ig-label{font-size:12px;font-weight:600;text-align:center;line-height:1.3}
+
+  .variants{margin-bottom:14px}
+  .variants-title{font-size:10px;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+  .var-tabs{display:flex;gap:6px;margin-bottom:10px}
+  .var-tab{font-size:11px;font-weight:700;padding:4px 12px;border-radius:10px;border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:.2s;background:transparent;font-family:inherit}
+  .var-tab:hover,.var-tab.active{background:var(--accent-grad);color:var(--bg);border-color:var(--accent)}
+  .var-panel{display:none}
+  .var-panel.active{display:block}
+
+  .gemini{background:rgba(107,92,231,.08);border:1px solid rgba(107,92,231,.25);border-radius:8px;padding:10px 14px;font-size:11px;color:rgba(200,180,255,.85);line-height:1.5;margin-top:10px}
+  .gemini::before{content:"GEMINI PROMPT";display:block;font-size:9px;font-weight:700;color:var(--purple);margin-bottom:4px;letter-spacing:1px}
+  .gemini-var{display:inline-block;padding:2px 8px;border-radius:4px;font-size:9px;font-weight:700;margin-right:6px;letter-spacing:.5px;vertical-align:middle}
+  .gemini-var-a{background:var(--accent);color:var(--bg)}
+  .gemini-var-b{background:var(--accent2);color:var(--bg)}
+  .gemini-refs{margin-top:6px;padding-top:6px;border-top:1px solid rgba(107,92,231,.15);font-size:10px;color:var(--purple);font-weight:700;letter-spacing:.5px}
+  .gemini-refs .sb-ref-link{margin-left:6px}
+  .gemini-prompt{display:block;margin-top:8px;padding:10px 14px;background:rgba(0,0,0,.15);border-radius:6px;font-size:11px;color:rgba(200,180,255,.9);line-height:1.7;white-space:pre-wrap;cursor:text;user-select:text}
+  .sb-arrow{display:flex;align-items:center;gap:8px;padding:6px 0 6px 12px;font-size:10px;font-weight:700;color:var(--purple);letter-spacing:.5px}
+  .sb-arrow::before{content:"\2193";font-size:16px}
+
+  .screen-text{background:rgba(1,232,171,.05);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:12px}
+  .screen-text::before{content:"ТЕКСТ НА ЭКРАНЕ";display:block;font-size:9px;font-weight:700;color:var(--accent);margin-bottom:6px;letter-spacing:1px}
+  .screen-text p{font-size:12px;color:rgba(255,255,255,.8);line-height:1.6;margin-bottom:4px}
+  .screen-text ul{list-style:none;padding:0}
+  .screen-text li{font-size:12px;color:rgba(255,255,255,.8);padding:2px 0}
+  .screen-text li::before{content:"\2014  ";color:var(--accent);font-weight:700}
+  .vc-fact{color:var(--accent2)!important;font-weight:600}
+
+  .schema-desc{background:rgba(41,166,203,.05);border-left:3px solid var(--accent2);border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:12px}
+  .schema-desc::before{content:"СХЕМА / ЧТО НАРИСОВАТЬ";display:block;font-size:9px;font-weight:700;color:var(--accent2);margin-bottom:6px;letter-spacing:1px}
+  .schema-desc p{font-size:12px;color:rgba(255,255,255,.75);line-height:1.6}
+
+  .editor-note{font-size:11px;color:var(--muted);line-height:1.5;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
+  .editor-note::before{content:"МОНТАЖ: ";font-weight:700;color:var(--blue)}
+
+  /* Storyboard — full-width block below segment */
+  .storyboard{background:rgba(107,92,231,.04);border:2px solid rgba(107,92,231,.25);border-radius:14px;padding:20px 24px;margin:-6px 0 20px;scroll-margin-top:70px}
+  .sb-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+  .sb-header{font-size:12px;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:1px}
+  .sb-refs{display:flex;gap:8px;flex-wrap:wrap}
+  .sb-ref-link{font-size:11px;color:var(--accent2);background:rgba(41,166,203,.1);border:1px solid rgba(41,166,203,.2);padding:3px 10px;border-radius:6px;text-decoration:none;cursor:pointer;transition:.2s}
+  .sb-ref-link:hover{background:rgba(41,166,203,.2);color:var(--white)}
+  .sb-ref-link.copied{background:var(--ok);color:var(--bg);border-color:var(--ok)}
+  .sb-style{font-size:10px;color:rgba(200,180,255,.6);margin-bottom:16px;padding:6px 12px;background:rgba(107,92,231,.08);border-radius:6px;font-style:italic}
+  .sb-grid{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:0;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:10px}
+  .sb-grid-header{display:contents}
+  .sb-grid-header>div{background:rgba(107,92,231,.12);padding:8px 12px;font-size:10px;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--border)}
+  .sb-row{display:contents}
+  .sb-row>div{padding:10px 12px;border-bottom:1px solid var(--border);font-size:12px}
+  .sb-row:last-child>div{border-bottom:none}
+  .sb-col-tx{background:rgba(0,0,0,.08);color:rgba(255,255,255,.75);line-height:1.6}
+  .sb-col-desc{background:rgba(0,0,0,.04);color:rgba(255,255,255,.8);line-height:1.5}
+  .sb-col-prompt{background:rgba(107,92,231,.04);color:rgba(200,180,255,.8);line-height:1.5;position:relative}
+  .sb-frame-num{display:inline-block;font-size:14px;font-weight:800;color:var(--purple);opacity:.6;margin-right:6px}
+  .sb-frame-tc{font-size:10px;color:var(--accent);font-weight:700;font-family:monospace;display:block;margin-bottom:4px}
+  .sb-copy-btn{background:linear-gradient(135deg,#6B5CE7,#8B5CF6);color:white;border:none;padding:4px 10px;border-radius:5px;cursor:pointer;font-weight:700;font-family:inherit;font-size:10px;white-space:nowrap;transition:.2s;float:right;margin:0 0 4px 8px}
+  .sb-copy-btn:hover{filter:brightness(1.2)}
+  .sb-copy-btn.copied{background:#4ADE80;color:var(--bg)}
+  .sb-kling{font-size:11px;color:var(--muted);padding:8px 12px;background:rgba(245,158,11,.06);border-left:3px solid var(--warn);border-radius:0 6px 6px 0}
+  .sb-kling b{color:var(--warn)}
+
+  .cue-legend{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px 20px;margin-bottom:32px;display:flex;gap:20px;flex-wrap:wrap;align-items:center}
+  .cue-legend-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+
+  .footer{text-align:center;padding:32px 40px;color:var(--muted);font-size:13px;border-top:1px solid var(--border)}
+  .footer a{color:var(--white);text-decoration:none;font-weight:700;letter-spacing:.5px}
+  .footer a:hover{text-decoration:underline}
+
+  .ref-img{width:100%;border-radius:8px;border:2px dashed rgba(245,158,11,.35);margin:8px 0;cursor:grab;transition:border-color .2s,transform .2s}
+  .ref-img:hover{border-color:var(--warn);transform:scale(1.01)}
+  .ref-img:active{cursor:grabbing}
+  .drag-hint{font-size:9px;color:var(--warn);font-weight:700;text-align:center;letter-spacing:.5px;margin:-2px 0 6px;opacity:.7}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-left">
+    <div class="logo">YTRF</div>
+    <div class="hdr-title">YTRF02 Bakulina &mdash; 3 ошибки пациентов | Screen Plan</div>
+  </div>
+  <div class="hdr-right">
+    <div class="hdr-meta">
+      <div class="hdr-version">v3 &middot; 10 segments &middot; ~6:25</div>
+      <div class="hdr-date">2026-03-29 22:40 (Dubai, GMT+4)</div>
+    </div>
+    <div class="hdr-brand">powered by <a href="https://rya.ae/" target="_blank">RYA.AE</a></div>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- Project Info -->
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:24px;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:20px 24px;">
+  <div>
+    <div style="font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Проект</div>
+    <div style="font-size:14px;font-weight:600;">YTRF02_Bakulina_3_Patient_Mistakes</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:4px;">Канал: YTRF (Рефлюкс Контроль)</div>
+    <div style="font-size:12px;color:var(--muted);">Спикер: Бакулина Наталья Валерьевна, д.м.н.</div>
+  </div>
+  <div>
+    <div style="font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Видео</div>
+    <div style="font-size:14px;font-weight:600;">3 ошибки пациентов с изжогой</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:4px;">Хронометраж: ~6:25</div>
+    <div style="font-size:12px;color:var(--muted);">Сегменты: 10 (USE=TRUE) + дисклеймер</div>
+  </div>
+  <div>
+    <div style="font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Стадия</div>
+    <div style="font-size:14px;font-weight:600;">Pre-Edit (Screen Plan)</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:4px;">Источник: Assembly v5</div>
+    <div style="font-size:12px;color:var(--muted);">Визуал: <a href="https://romansergeevcom.github.io/ytrf-dna/" target="_blank" style="color:var(--accent2);text-decoration:underline;">YTRF DNA</a></div>
+  </div>
+</div>
+
+<div class="summary">
+  <div class="sum-card"><div class="sum-num">4</div><div class="sum-label">Схема / Инфо</div></div>
+  <div class="sum-card"><div class="sum-num">2</div><div class="sum-label">B-roll</div></div>
+  <div class="sum-card"><div class="sum-num">2</div><div class="sum-label">Side Slide</div></div>
+  <div class="sum-card"><div class="sum-num">3</div><div class="sum-label">Step Cards</div></div>
+  <div class="sum-card"><div class="sum-num">1</div><div class="sum-label">Speaker Intro</div></div>
+  <div class="sum-card"><div class="sum-num">1</div><div class="sum-label">Talking Head</div></div>
+  <div class="sum-card"><div class="sum-num">1</div><div class="sum-label">Дисклеймер</div></div>
+</div>
+
+<div class="cue-legend">
+  <div class="cue-legend-title">Метки для монтажёра:</div>
+  <span class="cue">&rarr; ЭКРАН</span> показать инфографику
+  <span class="cue cue-add">+ элемент</span> добавить пункт
+  <span class="cue cue-off">&times; ЧИСТЫЙ КАДР</span> убрать, вернуть спикера
+</div>
+
+<div class="legend">
+  <div class="leg-item"><div class="leg-dot" style="background:var(--ok)"></div> Hook / Представление</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--err)"></div> Ошибка 1</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--warn)"></div> Ошибка 2</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#EAB308"></div> Ошибка 3</div>
+</div>
+
+<div class="timeline">
+  <div class="tl-seg" style="left:0%;width:3.8%;background:var(--ok);"><span>H1</span></div>
+  <div class="tl-seg" style="left:3.8%;width:4%;background:var(--ok);"><span>H2</span></div>
+  <div class="tl-seg" style="left:7.8%;width:5.1%;background:var(--ok);"><span>Предст.</span></div>
+  <div class="tl-seg" style="left:12.9%;width:8.9%;background:var(--err);"><span>Ош.1а</span></div>
+  <div class="tl-seg" style="left:21.8%;width:10.7%;background:var(--err);"><span>Ош.1б</span></div>
+  <div class="tl-seg" style="left:32.5%;width:5.5%;background:var(--warn);"><span>Ош.2а</span></div>
+  <div class="tl-seg" style="left:38%;width:27%;background:var(--warn);"><span>Ош.2б</span></div>
+  <div class="tl-seg" style="left:65%;width:6%;background:var(--warn);"><span>Ош.2в</span></div>
+  <div class="tl-seg" style="left:71%;width:5.5%;background:#EAB308;"><span>Ош.3а</span></div>
+  <div class="tl-seg" style="left:76.5%;width:23.4%;background:#EAB308;"><span>Ош.3б</span></div>
+</div>
+
+<!-- ═══════════ BLOCK 1: HOOK ═══════════ -->
+<div class="block-sep" style="background:var(--ok);color:var(--bg);">1. Hook <span class="block-dur">~30 сек</span></div>
+
+<!-- SEG 1 -->
+<div class="seg" id="seg1">
+  <div class="seg-left">
+    <div class="seg-meta">
+      <span class="seg-num">seg_001</span>
+      <span class="seg-badge" style="background:var(--ok);color:var(--bg);">Hook</span>
+      <span class="seg-tc">1:01 &ndash; 1:16</span><span class="seg-dur">15s</span>
+    </div>
+    <div class="seg-title">Пациенты не считают себя больными</div>
+    <div class="seg-transcript">пациенты когда испытывают изжогу во-первых они не считают себя больными людьми почему-то среди населения бытует точка зрения что изжога это обычный симптом до переедания или просто особенное какое-то состояние</div>
+  </div>
+  <div class="seg-right">
+    <div class="scr-label">Talking Head <a class="scr-link" onclick="copyLink(this)" data-id="#seg1">&#x1F517;</a></div>
+    <div class="scr-preset">Чистый кадр спикера</div>
+    <div class="mock"><div class="m-th"><div class="spk"></div></div></div>
+  </div>
+  <div class="seg-prod">
+    <div class="prod-label">ПРОИЗВОДСТВО</div>
+    <div class="editor-note">Чистый кадр. Лёгкий зум 1% за 15 сек. Текст работает сам &mdash; не перегружать.</div>
+  </div>
+</div>
+
+<!-- SEG 2 -->
+<div class="seg" id="seg2">
+  <div class="seg-left">
+    <div class="seg-meta">
+      <span class="seg-num">seg_002</span>
+      <span class="seg-badge" style="background:var(--ok);color:var(--bg);">Hook</span>
+      <span class="seg-tc">3:13 &ndash; 3:29</span><span class="seg-dur">15s</span>
+    </div>
+    <div class="seg-title">Статистика: 17-18/100K, все умирают</div>
+    <div class="seg-transcript"><span class="cue">&rarr; ЭКРАН</span> приблизительно <span class="cue cue-add">+ цифра 17-18</span> 17-18 человек заболевают на 100 000 жителей и самое неприятное что практически все из заболевших умирают <span class="cue cue-add">+ выживаемость</span> пятилетняя выживаемость очень плохая при аденокарциноме пищевода <span class="cue cue-off">&times; ЧИСТЫЙ КАДР</span></div>
+  </div>
+  <div class="seg-right">
+    <div class="scr-label">Lower Third / Side Badge <a class="scr-link" onclick="copyLink(this)" data-id="#seg2">&#x1F517;</a></div>
+    <div class="scr-preset">Плашка поверх спикера (не fullscreen)</div>
+    <div class="variants">
+      <div class="variants-title">Варианты</div>
+      <div class="var-tabs">
+        <button class="var-tab active" onclick="switchVar(this,'seg2')">A: Lower Third</button>
+        <button class="var-tab" onclick="switchVar(this,'seg2')">B: Side Badge</button>
+      </div>
+      <div class="var-panel active" data-seg="seg2">
+        <div class="mock">
+          <div style="height:100%;display:flex;flex-direction:column;">
+            <div class="spk" style="flex:1;"></div>
+            <div style="background:rgba(10,21,32,.88);border-top:2px solid var(--accent);padding:10px 20px;display:flex;align-items:center;gap:20px;">
+              <div style="flex:1;text-align:center;">
+                <div style="font-size:22px;font-weight:800;color:var(--accent);">17&ndash;18</div>
+                <div style="font-size:9px;color:var(--muted);font-weight:600;">на 100 000</div>
+              </div>
+              <div style="width:1px;height:32px;background:var(--border);"></div>
+              <div style="flex:1;text-align:center;">
+                <div style="font-size:22px;font-weight:800;color:var(--err);">&lt;20%</div>
+                <div style="font-size:9px;color:var(--muted);font-weight:600;">5-лет выживаемость</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="var-panel" data-seg="seg2">
+        <div class="mock">
+          <div style="height:100%;position:relative;">
+            <div class="spk" style="height:100%;"></div>
+            <div style="position:absolute;top:12px;right:12px;background:rgba(10,21,32,.92);border:1px solid var(--border);border-radius:10px;padding:12px 16px;width:130px;">
+              <div style="text-align:center;margin-bottom:8px;">
+                <div style="font-size:20px;font-weight:800;color:var(--accent);">17&ndash;18</div>
+                <div style="font-size:8px;color:var(--muted);font-weight:600;">на 100 000</div>
+              </div>
+              <div style="height:1px;background:var(--border);margin-bottom:8px;"></div>
+              <div style="text-align:center;">
+                <div style="font-size:20px;font-weight:800;color:var(--err);">&lt;20%</div>
+                <div style="font-size:8px;color:var(--muted);font-weight:600;">5-лет выживаемость</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="screen-text">
+      <p><span class="vc-fact">17&ndash;18 на 100 000</span> &mdash; заболеваемость</p>
+      <p><span class="vc-fact">5-летняя выживаемость &lt;20%</span></p>
+      <p>Спикер остаётся в кадре &mdash; цифры как подкрепление, не приговор</p>
+    </div>
+  </div>
+  <div class="seg-prod">
+    <div class="prod-label">ПРОИЗВОДСТВО</div>
+    <div class="gemini"><span class="gemini-var gemini-var-a">A &mdash; LOWER THIRD</span>
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      Полупрозрачная полоса внизу, два блока с числами, разделитель
+      <div class="gemini-prompt">КОНТЕКСТ: Lower third плашка для медицинского видео о ГЭРБ. Показываем статистику поверх кадра спикера — подкрепление слов, не приговор.
+
+ЗАДАНИЕ: Тёмная полупрозрачная полоса внизу экрана (высота ~15% кадра), фон rgba(10,21,32,.88), зелёная линия сверху #01E8AB 2px. Два блока разделены тонкой вертикальной линией. Без текста на изображении — только фон полосы и разделитель. 3840x2160.</div>
+    </div>
+    <div class="gemini"><span class="gemini-var gemini-var-b">B &mdash; SIDE BADGE</span>
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      Плавающая карточка в правом верхнем углу
+      <div class="gemini-prompt">КОНТЕКСТ: Плавающая карточка-бейдж для медицинского видео. Показываем статистику в углу поверх кадра спикера.
+
+ЗАДАНИЕ: Карточка в правом верхнем углу (~200x280px), скруглённые углы 10px, фон rgba(10,21,32,.92), рамка rgba(123,164,212,.15) 1px. Внутри два блока разделены тонкой горизонтальной линией. Без текста на изображении — только форма карточки и разделитель. 3840x2160.</div>
+    </div>
+    <div class="editor-note"><b>Текст (добавить в AE поверх):</b><br>
+      Верхний блок: "17-18" Raleway Black 72px #01E8AB, мелко "на 100 000" Light 14px серый<br>
+      Нижний блок: "&lt;20%" Raleway Black 72px #E05555, мелко "5-лет выживаемость" Light 14px серый</div>
+    <div class="editor-note">Экран на "Приблизительно". Первое число сразу, второе на "умирают". Спикер в кадре всё время.</div>
+  </div>
+</div>
+
+<!-- ═══════════ BLOCK 2: ПРЕДСТАВЛЕНИЕ ═══════════ -->
+<div class="block-sep" style="background:var(--ok);color:var(--bg);">2. Представление <span class="block-dur">~20 сек</span></div>
+
+<!-- SEG 3 -->
+<div class="seg" id="seg3">
+  <div class="seg-left">
+    <div class="seg-meta">
+      <span class="seg-num">seg_003</span>
+      <span class="seg-badge" style="background:var(--ok);color:var(--bg);">Представление</span>
+      <span class="seg-tc">9:05 &ndash; 9:25</span><span class="seg-dur">20s</span>
+    </div>
+    <div class="seg-title">Бакулина Наталья Валерьевна, СЗГМУ</div>
+    <div class="seg-transcript"><span class="cue">&rarr; ПЛАШКА</span> Меня зовут Бакулина Наталья Валерьевна. Я представлюсь. Профессор, доктор медицинских наук, проректор по науке и инновационной деятельности Северо-Западного государственного медицинского университета имени Мечникова, <span class="cue cue-off">&times; ЧИСТЫЙ КАДР</span> заведующий кафедрой внутренних болезней, нефрологии, общей клинической фармакологии с курсом фармации.</div>
+  </div>
+  <div class="seg-right">
+    <div class="scr-label">Speaker Intro <a class="scr-link" onclick="copyLink(this)" data-id="#seg3">&#x1F517;</a></div>
+    <div class="scr-preset">Плашка поверх спикера (scr_001)</div>
+    <div class="mock">
+      <div class="m-si">
+        <div class="spk"></div>
+        <div class="m-si-bar">
+          <div class="m-si-photo">&#x1F469;&#x200D;&#x2695;&#xFE0F;</div>
+          <div class="m-si-info">
+            <h3>Наталья Бакулина</h3>
+            <p>Профессор, д.м.н. &middot; Проректор по науке</p>
+          </div>
+          <div class="m-si-logo">СЗГМУ<br>Мечников</div>
+        </div>
+      </div>
+    </div>
+    <div class="screen-text">
+      <ul>
+        <li>Профессор, доктор медицинских наук</li>
+        <li>Проректор по науке СЗГМУ им. Мечникова</li>
+        <li>Заведующая кафедрой внутренних болезней</li>
+      </ul>
+    </div>
+  </div>
+  <div class="seg-prod">
+    <div class="prod-label">ПРОИЗВОДСТВО</div>
+    <div class="editor-note">Плашка через 2 сек, ~12 сек, fade out. Добавить лого СЗГМУ (найти PNG). Assembly scr_001.</div>
+  </div>
+</div>
+
+<!-- ═══════════ DISCLAIMER ═══════════ -->
+<div class="block-sep" style="background:var(--muted);color:var(--bg);">Дисклеймер <span class="block-dur">5&ndash;8 сек</span></div>
+
+<div class="seg" id="seg-disc">
+  <div class="seg-left">
+    <div class="seg-meta">
+      <span class="seg-num">disc</span>
+      <span class="seg-badge" style="background:var(--muted);color:var(--bg);">Disclaimer</span>
+      <span class="seg-dur">5&ndash;8s</span>
+    </div>
+    <div class="seg-title">Медицинский дисклеймер</div>
+    <div class="seg-transcript">Без озвучки &mdash; зритель читает сам.</div>
+  </div>
+  <div class="seg-right">
+    <div class="scr-label">Fullscreen Disclaimer <a class="scr-link" onclick="copyLink(this)" data-id="#seg-disc">&#x1F517;</a></div>
+    <div class="mock"><div class="m-disc"><h2>Дисклеймер</h2><p>Этот канал предоставляет информацию о здоровье в образовательных целях. Мы не даём медицинских рекомендаций и не заменяем консультацию врача.</p><p>Перед приёмом любых препаратов проконсультируйтесь с лечащим врачом.</p><p style="color:var(--muted);font-size:8px;margin-top:4px;">Ваше здоровье &mdash; ваша ответственность.</p></div></div>
+  </div>
+  <div class="seg-prod">
+    <div class="prod-label">ПРОИЗВОДСТВО</div>
+    <div class="editor-note">Тёмный фон, размытый кадр спикера под текстом. Без звука. 5&ndash;8 сек, fade out.</div>
+  </div>
+</div>
+
+<!-- ═══════════ BLOCK 3: ОШИБКА 1 ═══════════ -->
+<div class="block-sep" style="background:var(--err);">3. Ошибка 1: Не идут к врачу <span class="block-dur">~75 сек</span></div>
+
+<!-- Step Cards 1 — показываем как lower third поверх первых слов seg_004 -->
+<div class="seg" id="seg-step1">
+  <div class="seg-left">
+    <div class="seg-meta">
+      <span class="seg-num">step</span>
+      <span class="seg-badge" style="background:var(--accent);color:var(--bg);">Прогресс</span>
+    </div>
+    <div class="seg-title">Step Cards (lower third, поверх речи)</div>
+    <div class="seg-transcript"><span class="cue">&rarr; STEP CARDS</span> Наши люди не связывают изжогу с конкретной болезнью. <span class="cue cue-off">&times; ЧИСТЫЙ КАДР</span> Первая ошибка...</div>
+  </div>
+  <div class="seg-right">
+    <div class="scr-label">Step Cards (lower third) <a class="scr-link" onclick="copyLink(this)" data-id="#seg-step1">&#x1F517;</a></div>
+    <div class="scr-preset">Нижняя треть поверх спикера, 3&ndash;4 сек</div>
+    <div class="mock">
+      <div class="m-steps">
+        <div class="step-card active"><div class="step-lbl">ОШИБКА 1</div><hr class="step-sep"><div class="step-txt">Не идут к врачу</div></div>
+        <div class="step-card future"><div class="step-lbl">ОШИБКА 2</div><hr class="step-sep"><div class="step-txt">Самолечение</div></div>
+        <div class="step-card future"><div class="step-lbl">ОШИБКА 3</div><hr class="step-sep"><div class="step-txt">Псевдоспециалисты</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="seg-prod">
+    <div class="prod-label">ПРОИЗВОДСТВО</div>
+    <div class="editor-note">Lower third: 3 карточки в нижней трети экрана поверх спикера. Показать 3&ndash;4 сек на первых словах сегмента, fade out. Спикер продолжает говорить. Текущая ошибка яркая, остальные тусклые.</div>
+  </div>
+</div>
+
+<!-- SEG 4 -->
+<div class="seg" id="seg4">
+  <div class="seg-left">
+    <div class="seg-meta">
+      <span class="seg-num">seg_004</span>
+      <span class="seg-badge" style="background:var(--err);">Ошибка 1</span>
+      <span class="seg-tc">1:17 &ndash; 1:51</span><span class="seg-dur">34s</span>
+    </div>
+    <div class="seg-title">Осложнения: изжога &rarr; воспаление &rarr; предрак &rarr; рак</div>
+    <div class="seg-transcript">наши люди не связывают изжогу с какой-то конкретной болезни поэтому первая ошибка это не своевременное обращение к врачу <span class="cue">&rarr; ЭКРАН</span> длительность существующая изжога приводит к осложнениям гастрофагиальной рефлюксной болезни <span class="cue cue-add">+ воспаление</span> это осложнение лежат плоскости и язвенного поражения пищевода <span class="cue cue-add">+ сужение</span> из образования структур пищевода с различными осложнениями <span class="cue cue-add">+ предрак</span> конечно самое грозное это метаплазия дисплазия пищевод барта <span class="cue cue-add">+ рак</span> и самое неприятное это рака дэна карцинома пищевода это первое первое <span class="cue cue-off">&times; ЧИСТЫЙ КАДР</span></div>
+  </div>
+  <div class="seg-right">
+    <div class="scr-label">Fullscreen Visual Demo <a class="scr-link" onclick="copyLink(this)" data-id="#seg4">&#x1F517;</a></div>
+    <div class="scr-preset">Пресет AE: Visual Demonstration</div>
+    <div class="variants">
+      <div class="variants-title">Варианты</div>
+      <div class="var-tabs">
+        <button class="var-tab active" onclick="switchVar(this,'seg4')">A: Цепочка</button>
+        <button class="var-tab" onclick="switchVar(this,'seg4')">B: Лестница</button>
+      </div>
+      <div class="var-panel active" data-seg="seg4">
+        <div class="mock">
+          <div class="m-fp">
+            <div style="display:flex;flex-direction:column;align-items:center;"><div class="fp-node" style="border-color:var(--ok);color:var(--ok);">Изжога</div><div class="fp-sub">жжение за грудиной</div></div>
+            <div class="fp-arrow">&rarr;</div>
+            <div style="display:flex;flex-direction:column;align-items:center;"><div class="fp-node" style="border-color:var(--warn);color:var(--warn);">Воспаление<br>и язвы</div><div class="fp-sub">эзофагит</div></div>
+            <div class="fp-arrow">&rarr;</div>
+            <div style="display:flex;flex-direction:column;align-items:center;"><div class="fp-node" style="border-color:#F97316;color:#F97316;">Сужение<br>пищевода</div><div class="fp-sub">стриктуры</div></div>
+            <div class="fp-arrow">&rarr;</div>
+            <div style="display:flex;flex-direction:column;align-items:center;"><div class="fp-node" style="border-color:var(--err);color:var(--err);">Предрак</div><div class="fp-sub">Барретт</div></div>
+            <div class="fp-arrow">&rarr;</div>
+            <div style="display:flex;flex-direction:column;align-items:center;"><div class="fp-node" style="border-color:#DC2626;color:#DC2626;border-width:3px;">Рак</div><div class="fp-sub">аденокарцинома</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="var-panel" data-seg="seg4">
+        <div class="mock">
+          <div class="m-fp" style="flex-direction:column;gap:4px;">
+            <div class="fp-node" style="border-color:#DC2626;color:#DC2626;min-width:140px;height:40px;border-width:3px;">РАК (аденокарцинома)</div>
+            <div style="font-size:14px;color:var(--accent);">&uarr;</div>
+            <div class="fp-node" style="border-color:var(--err);color:var(--err);min-width:140px;height:40px;">Предрак (Барретт)</div>
+            <div style="font-size:14px;color:var(--accent);">&uarr;</div>
+            <div class="fp-node" style="border-color:var(--warn);color:var(--warn);min-width:140px;height:40px;">Воспаление (эзофагит)</div>
+            <div style="font-size:14px;color:var(--accent);">&uarr;</div>
+            <div class="fp-node" style="border-color:var(--ok);color:var(--ok);min-width:140px;height:40px;">Изжога</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="screen-text">
+      <p><b>Лестница осложнений (понятно + профессионально):</b></p>
+      <ul>
+        <li><span class="vc-fact">Изжога</span> (ГЭРБ) &mdash; хронический заброс кислоты</li>
+        <li><span class="vc-fact">Воспаление и язвы</span> (эзофагит) &mdash; слизистая разрушается</li>
+        <li><span class="vc-fact">Сужение пищевода</span> (стриктуры) &mdash; трудно глотать</li>
+        <li><span class="vc-fact">Предрак</span> (пищевод Барретта) &mdash; клетки перерождаются</li>
+        <li><span class="vc-fact">РАК</span> (аденокарцинома) &mdash; крайне плохой прогноз</li>
+      </ul>
+    </div>
+  </div>
+  <!-- 3rd column: ПРОИЗВОДСТВО -->
+  <div class="seg-prod">
+    <div class="prod-label">ПРОИЗВОДСТВО</div>
+    <div class="editor-note">+ Chapter bar "ОШИБКА 1" (scr_002). Экран на "длительность существующая изжога". Узлы появляются по одному на словах спикера. Убрать на "это первое первое".</div>
+
+    <div class="ref-block">
+      <p><b>Референс:</b> Barrett's progression (Squamous &rarr; Barrett's &rarr; Dysplasia &rarr; Adenocarcinoma)</p>
+      <img class="ref-img" src="ref_images/barrett_s_progression_from_targeting_care_in_barretts_oesophagus_by_zeki_and_fitzgerald.jpg" alt="Barrett progression" draggable="true">
+      <div class="drag-hint">DRAG &rarr; Gemini &nbsp;|&nbsp; Click &rarr; new tab</div>
+    </div>
+
+    <div style="font-size:10px;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">A &mdash; РАСКАДРОВКА (5 кадров) &mdash; генерируем последовательно</div>
+
+    <div class="gemini"><span class="gemini-var gemini-var-a">КАДР 1</span> &mdash; "приводит к осложнениям" &mdash; БАЗОВЫЙ КАДР
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      <div class="gemini-prompt">Прикладываю референс barrett_s_progression.jpg — реальная эндоскопия и гистология пищевода, 5 стадий: Squamous → Non-dysplastic Barrett's → Low grade dysplasia → High grade dysplasia → Adenocarcinoma. Верхний ряд — эндоскоп, нижний — микроскоп.
+
+Создай медицинскую иллюстрацию — вертикальный разрез пищевода и верхней части желудка. Ориентир — 1-я колонка референса (Squamous, здоровая ткань). Пищевод здоровый — гладкие стенки, ровный розовый эпителий, зелёный контур (#4ADE80). Желудок внизу с голубой жидкостью.
+
+Стиль: минималистичная медицинская иллюстрация, чистые линии, без фотореализма. Тёмный фон #0A1520. Без текста на изображении. 3840x2160.</div>
+    </div>
+
+    <div class="sb-arrow">приложи результат Кадра 1</div>
+
+    <div class="gemini"><span class="gemini-var gemini-var-a">КАДР 2</span> &mdash; "язвенного поражения"
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      <div class="gemini-prompt">Прикладываю предыдущий кадр + референс barrett_s_progression.jpg. Ориентир — 2-я колонка (Non-dysplastic Barrett's).
+
+Сохрани ТОЧНО такой же ракурс. На стенке пищевода добавь красную зону воспаления — 2-3 точки эрозии, красный градиент на внутренней поверхности. Контур пищевода стал жёлтым (#F59E0B). Всё остальное без изменений. Без текста на изображении. 3840x2160.</div>
+    </div>
+
+    <div class="sb-arrow">приложи результат Кадра 2</div>
+
+    <div class="gemini"><span class="gemini-var gemini-var-a">КАДР 3</span> &mdash; "образования структур"
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      <div class="gemini-prompt">Прикладываю предыдущий кадр + референс barrett_s_progression.jpg. Ориентир — 3-я колонка (Low grade dysplasia).
+
+Сохрани ракурс. Просвет пищевода сузился — стенки толще, видны оранжевые полосы рубцовой ткани. Воспаление из предыдущего кадра остаётся. Контур оранжевый (#F97316). Без текста на изображении. 3840x2160.</div>
+    </div>
+
+    <div class="sb-arrow">приложи результат Кадра 3</div>
+
+    <div class="gemini"><span class="gemini-var gemini-var-a">КАДР 4</span> &mdash; "метаплазия дисплазия Барретт"
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      <div class="gemini-prompt">Прикладываю предыдущий кадр + референс barrett_s_progression.jpg. Ориентир — 4-я колонка (High grade dysplasia).
+
+Сохрани ракурс. Нижняя часть пищевода — клетки изменили цвет с розового на оранжево-красный (метаплазия). Справа от пищевода добавь выноску-круг с увеличенным видом: хаотично расположенные клетки разной формы и размера. Контур красный (#E05555). Без текста на изображении. 3840x2160.</div>
+    </div>
+
+    <div class="sb-arrow">приложи результат Кадра 4</div>
+
+    <div class="gemini"><span class="gemini-var gemini-var-a">КАДР 5</span> &mdash; "аденокарцинома" &mdash; ФИНАЛ
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      <div class="gemini-prompt">Прикладываю предыдущий кадр + референс barrett_s_progression.jpg. Ориентир — 5-я колонка (Adenocarcinoma).
+
+Сохрани ракурс. В стенке пищевода — тёмно-красная масса (опухоль), просвет почти полностью закрыт. Все повреждения из предыдущих кадров остаются. Контур тёмно-красный (#DC2626), толщина 3px. Самый драматичный кадр. Без текста на изображении. 3840x2160.</div>
+    </div>
+
+    <div class="gemini"><span class="gemini-var gemini-var-b">B &mdash; ЛЕСТНИЦА</span>
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      <div class="gemini-prompt">КОНТЕКСТ: Инфографика для видео о ГЭРБ. Показываем прогрессию осложнений изжоги как вертикальную лестницу снизу вверх.
+
+РЕФЕРЕНС: Прикладываю barrett_s_progression.jpg — реальная эндоскопия, 5 стадий от здоровой ткани до рака. Используй как медицинский ориентир для понимания каждой стадии.
+
+СТИЛЬ: Минималистичная инфографика на тёмном фоне #0A1520. Без текста на изображении. 3840x2160.
+
+ЗАДАНИЕ: Вертикальная лестница из 5 ступеней снизу вверх. Каждая ступень — прямоугольный блок с иконкой/символом стадии (без текста). Стрелки между ступенями #01E8AB. Цвета ступеней снизу вверх: #4ADE80 (здоровый) → #F59E0B (воспаление) → #F97316 (сужение) → #E05555 (предрак) → #DC2626 (рак, толстая рамка, крупнее). Каждая ступень содержит схематичную иконку состояния пищевода без подписей.</div>
+    </div>
+
+    <div class="editor-note" style="margin-top:10px;"><b>Текст (добавить в AE поверх):</b><br>
+      Кадр 1: "Изжога" #4ADE80 Bold 48px<br>
+      Кадр 2: "Воспаление и язвы" #F59E0B Bold 48px, мелко "(эзофагит)" Light 20px серый<br>
+      Кадр 3: "Сужение пищевода" #F97316 Bold 48px, мелко "(стриктуры)"<br>
+      Кадр 4: "Предрак" #E05555 Bold 48px, мелко "(пищевод Барретта)"<br>
+      Кадр 5: "РАК" #DC2626 Black 72px, мелко "(аденокарцинома)"<br>
+      Шрифт: Raleway. Позиция: внизу или сбоку, не перекрывая иллюстрацию.</div>
+    <div class="sb-kling"><b>Kling:</b> кадры 1&rarr;5, 5 сек, морфинг.</div>
+  </div>
+</div>
+
+<!-- SEG 5 -->
+<div class="seg" id="seg5">
+  <div class="seg-left">
+    <div class="seg-meta">
+      <span class="seg-num">seg_005</span>
+      <span class="seg-badge" style="background:var(--err);">Ошибка 1</span>
+      <span class="seg-tc">2:17 &ndash; 2:59</span><span class="seg-dur">41s</span>
+    </div>
+    <div class="seg-title">Механизм: кислота + желчь &rarr; повреждение &rarr; предрак</div>
+    <div class="seg-transcript">длительно существующие рефлюкс то есть заброс кислого содержимого из желудка в пищевод <span class="cue">&rarr; SIDE SLIDE</span> и важно отметить что не только кислого содержимого но и компонентов желудочного сока <span class="cue cue-add">+ желчь</span> такие как желчь <span class="cue cue-add">+ ферменты</span> такие как панкреатические ферменты <span class="cue cue-add">+ повреждение</span> все это еще в большей степени чем кислота повреждает эпителий пищевода который под действием этих негативных факторов перерождается <span class="cue cue-add">+ предрак</span> меняется клеточная структура и морфологически мы уже видим потенциальный предрак пищевод барта из которого чаще образуется адена карцинома уже непосредственно рак с плохим исходом <span class="cue cue-off">&times; ЧИСТЫЙ КАДР</span></div>
+  </div>
+  <div class="seg-right">
+    <div class="scr-label">Side Slide &mdash; Схема <a class="scr-link" onclick="copyLink(this)" data-id="#seg5">&#x1F517;</a></div>
+    <div class="scr-preset">Пресет AE: Side Slide</div>
+    <div class="variants">
+      <div class="variants-title">Варианты</div>
+      <div class="var-tabs">
+        <button class="var-tab active" onclick="switchVar(this,'seg5')">A: Side Slide</button>
+        <button class="var-tab" onclick="switchVar(this,'seg5')">B: Анатомическая</button>
+      </div>
+      <div class="var-panel active" data-seg="seg5">
+        <div class="mock"><div class="m-ss"><div class="m-ss-l"><h3>Что разрушает пищевод</h3><ul><li>Кислота из желудка</li><li class="dim">Желчь (опаснее кислоты)</li><li class="dim">Ферменты поджелудочной</li><li class="dim">Повреждение стенок</li><li class="dim">Предрак &rarr; рак</li></ul><div class="add">Пункты по одному</div></div><div class="spk" style="border-radius:0;"></div></div></div>
+      </div>
+      <div class="var-panel" data-seg="seg5">
+        <div class="mock">
+          <div class="m-fp" style="flex-direction:column;gap:4px;">
+            <div style="font-size:10px;color:var(--muted);">ЖЕЛУДОК</div>
+            <div style="display:flex;gap:8px;"><div class="fp-node" style="border-color:var(--err);color:var(--err);min-width:50px;height:35px;font-size:8px;">Кислота</div><div class="fp-node" style="border-color:var(--warn);color:var(--warn);min-width:50px;height:35px;font-size:8px;">Желчь</div><div class="fp-node" style="border-color:#F97316;color:#F97316;min-width:50px;height:35px;font-size:8px;">Ферменты</div></div>
+            <div style="font-size:14px;color:var(--accent);">&darr;</div>
+            <div style="display:flex;gap:6px;"><div class="fp-node" style="border-color:var(--accent2);color:var(--accent2);min-width:70px;height:35px;font-size:8px;">Повреждение</div><div class="fp-arrow" style="font-size:14px;">&rarr;</div><div class="fp-node" style="border-color:var(--err);color:var(--err);min-width:70px;height:35px;font-size:8px;">Предрак</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="screen-text">
+      <p><b>Что разрушает пищевод (элементы на словах):</b></p>
+      <ul>
+        <li><span class="vc-fact">Кислота</span> &mdash; основной агрессор</li>
+        <li><span class="vc-fact">Желчь</span> &mdash; ещё опаснее кислоты</li>
+        <li><span class="vc-fact">Ферменты</span> &mdash; расщепляют ткани</li>
+      </ul>
+      <p><b>Результат:</b> воспаление &rarr; изменение клеток &rarr; предрак &rarr; рак</p>
+    </div>
+  </div>
+  <!-- 3rd column: ПРОИЗВОДСТВО -->
+  <div class="seg-prod">
+    <div class="prod-label">ПРОИЗВОДСТВО</div>
+    <div class="editor-note">Side Slide: тезисы по одному на словах спикера. Экран на "заброс кислого содержимого". Убрать перед "с плохим исходом".</div>
+
+    <div class="ref-block">
+      <p><b>Референсы:</b></p>
+      <img class="ref-img" src="ref_images/GERD (1).webp" alt="GERD mechanism" draggable="true">
+      <img class="ref-img" src="ref_images/Z.jpeg" alt="Healthy vs GERD" draggable="true">
+      <img class="ref-img" src="ref_images/images.jpeg" alt="Barrett anatomy" draggable="true">
+      <div class="drag-hint">DRAG &rarr; Gemini &nbsp;|&nbsp; Click &rarr; new tab</div>
+    </div>
+
+    <div style="font-size:10px;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">B &mdash; РАСКАДРОВКА (4 кадра) &mdash; генерируем последовательно</div>
+
+    <div class="gemini"><span class="gemini-var gemini-var-b">КАДР 1</span> &mdash; "заброс кислого содержимого" &mdash; БАЗОВЫЙ КАДР
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      <div class="gemini-prompt">Прикладываю 3 референса:
+1) GERD.webp — схема рефлюкса: СЛЕВА здоровый пищевод (закрытый сфинктер), СПРАВА — открытый сфинктер, содержимое поднимается вверх.
+2) Z.jpeg — аналогичная схема "Healthy vs GERD" с цветными стрелками.
+3) images.jpeg — анатомия Barrett в разрезе, 4 стадии.
+
+Возьми композицию ПРАВОЙ части GERD.webp как основу. Создай разрез пищевода и желудка. Сфинктер открыт. Из желудка ОДНА красная толстая стрелка вверх в пищевод. Стенки здоровые (розовые, гладкие).
+
+Стиль: минималистичная медицинская иллюстрация, чистые линии, без фотореализма. Тёмный фон #0A1520. Без текста на изображении. 3840x2160.</div>
+    </div>
+
+    <div class="sb-arrow">приложи результат Кадра 1</div>
+
+    <div class="gemini"><span class="gemini-var gemini-var-b">КАДР 2</span> &mdash; "желчь"
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      <div class="gemini-prompt">Прикладываю предыдущий кадр.
+
+Сохрани ТОЧНО такой же ракурс. Рядом с красной стрелкой добавь ВТОРУЮ — жёлто-зелёную (#84CC16), тоже из желудка вверх в пищевод. Красная стрелка остаётся. Всё остальное без изменений. Без текста на изображении. 3840x2160.</div>
+    </div>
+
+    <div class="sb-arrow">приложи результат Кадра 2</div>
+
+    <div class="gemini"><span class="gemini-var gemini-var-b">КАДР 3</span> &mdash; "панкреатические ферменты"
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      <div class="gemini-prompt">Прикладываю предыдущий кадр.
+
+Сохрани ракурс. Добавь ТРЕТЬЮ стрелку — оранжевую (#F97316), из желудка вверх, рядом с двумя существующими. Все 3 стрелки касаются стенки пищевода. В месте контакта — лёгкое оранжевое свечение (начало раздражения). Без текста на изображении. 3840x2160.</div>
+    </div>
+
+    <div class="sb-arrow">приложи результат Кадра 3</div>
+
+    <div class="gemini"><span class="gemini-var gemini-var-b">КАДР 4</span> &mdash; "повреждает эпителий... предрак" &mdash; ФИНАЛ
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      <div class="gemini-prompt">Прикладываю предыдущий кадр.
+
+Сохрани ракурс. Стенка пищевода повреждена — красный градиент, точки эрозии. 3 стрелки остаются. Справа добавь выноску-круг с увеличенным видом: хаотично расположенные оранжево-красные клетки (метаплазия). Без текста на изображении. 3840x2160.</div>
+    </div>
+
+    <div class="editor-note" style="margin-top:10px;"><b>Текст (добавить в AE поверх):</b><br>
+      Кадр 1: "Кислота" рядом со стрелкой, Raleway Bold 24px белый<br>
+      Кадр 2: "Желчь" рядом с жёлто-зелёной стрелкой<br>
+      Кадр 3: "Ферменты" рядом с оранжевой стрелкой<br>
+      Кадр 4: "Предрак" #E05555 Bold 36px, мелко "(пищевод Барретта)" Light 18px серый</div>
+    <div class="sb-kling"><b>Kling:</b> кадры 1&rarr;4, 4 сек, стрелки появляются.</div>
+  </div>
+</div>
+
+<!-- ═══════════ BLOCK 4: ОШИБКА 2 ═══════════ -->
+<div class="block-sep" style="background:var(--warn);color:var(--bg);">4. Ошибка 2: Самолечение содой <span class="block-dur">~148 сек</span></div>
+
+<!-- Step Cards 2 -->
+<div class="seg" id="seg-step2">
+  <div class="seg-left">
+    <div class="seg-meta"><span class="seg-num">step</span><span class="seg-badge" style="background:var(--accent);color:var(--bg);">Прогресс</span></div>
+    <div class="seg-title">Step Cards (lower third)</div>
+    <div class="seg-transcript"><span class="cue">&rarr; STEP CARDS</span> второй проблему можно описать данными следующим образом <span class="cue cue-off">&times; ЧИСТЫЙ КАДР</span> использование подручных средств...</div>
+  </div>
+  <div class="seg-right">
+    <div class="scr-label">Step Cards <a class="scr-link" onclick="copyLink(this)" data-id="#seg-step2">&#x1F517;</a></div>
+    <div class="mock"><div class="m-steps"><div class="step-card done"><div class="step-lbl">ОШИБКА 1</div><hr class="step-sep"><div class="step-txt">Не идут к врачу</div></div><div class="step-card active"><div class="step-lbl">ОШИБКА 2</div><hr class="step-sep"><div class="step-txt">Самолечение</div></div><div class="step-card future"><div class="step-lbl">ОШИБКА 3</div><hr class="step-sep"><div class="step-txt">Псевдоспециалисты</div></div></div></div>
+  </div>
+  <div class="seg-prod">
+    <div class="prod-label">ПРОИЗВОДСТВО</div>
+    <div class="editor-note">Lower third 3&ndash;4 сек поверх спикера. Ошибка 1 с галочкой, Ошибка 2 яркая.</div>
+  </div>
+</div>
+
+<!-- SEG 6 -->
+<div class="seg" id="seg6">
+  <div class="seg-left">
+    <div class="seg-meta">
+      <span class="seg-num">seg_006</span>
+      <span class="seg-badge" style="background:var(--warn);color:var(--bg);">Ошибка 2</span>
+      <span class="seg-tc">3:50 &ndash; 4:11</span><span class="seg-dur">21s</span>
+    </div>
+    <div class="seg-title">Подручные средства: сода по старинке</div>
+    <div class="seg-transcript">второй проблему можно описать данными следующим образом использование подручных средств что чаще всего используют наши пациенты вместо нормального медикаментозного воздействия <span class="cue">&rarr; B-ROLL</span> соду да по старинке можно ли вообще использовать соду Да можно <span class="cue cue-off">&times; ЧИСТЫЙ КАДР</span></div>
+  </div>
+  <div class="seg-right">
+    <div class="scr-label">B-roll / Фото <a class="scr-link" onclick="copyLink(this)" data-id="#seg6">&#x1F517;</a></div>
+    <div class="scr-preset">Gemini или реальное фото</div>
+    <div class="mock"><div class="m-broll"><div class="br-icon">&#x1F944;</div><div class="br-text">Реальная пачка "Сода пищевая" (ГОСТ 32802-2014), ложка в стакане воды</div></div></div>
+  </div>
+  <div class="seg-prod">
+    <div class="prod-label">ПРОИЗВОДСТВО</div>
+    <div class="gemini">B-roll: пачка соды на кухне
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      <div class="gemini-prompt">КОНТЕКСТ: B-roll кадр для медицинского видео о самолечении изжоги. Показываем "бабушкин метод" — соду как народное средство.
+
+ЗАДАНИЕ: Фотореалистичная сцена на кухонном столе. В центре — красно-жёлтая пачка российской пищевой соды (прямоугольная коробка, жёлто-красная упаковка). Рядом — стакан воды, чайная ложка с горкой белого порошка. Тёплый боковой свет из окна, деревянная столешница. Стиль: документальная фотография, slightly desaturated, shallow depth of field (f/2.8). Настроение: ностальгия. Без людей в кадре. Без текста на изображении. 3840x2160.</div>
+    </div>
+    <div class="editor-note">+ Chapter bar "ОШИБКА 2" (scr_003). B-roll на "соду", 4&ndash;5 сек.</div>
+  </div>
+</div>
+
+<!-- SEG 7 -->
+<div class="seg" id="seg7">
+  <div class="seg-left">
+    <div class="seg-meta">
+      <span class="seg-num">seg_007</span>
+      <span class="seg-badge" style="background:var(--warn);color:var(--bg);">Ошибка 2</span>
+      <span class="seg-tc">4:13 &ndash; 5:57</span><span class="seg-dur">104s</span>
+    </div>
+    <div class="seg-title">Сода, мел, антациды vs ИПП &mdash; стандарт</div>
+    <div class="seg-transcript">ли редко если ничего нет под рукой но когда сода филия вот такие содаеды у нас есть которые съедают прям пачками эту соду конечно они наносят прежде всего себе урон своему здоровью что еще наши пациенты могут использовать некоторые даже едят мел такие случаи тоже были в моей практике некоторые используют большое количество антоцидных препаратов Да, антоциды это прекрасная таблетка в кармане, которая всегда может решить проблему в течение буквально минут. Но нужно отдавать себе отчет в том, что это адъювантная терапия, которая помогает основному средству. <span class="cue">&rarr; ЭКРАН</span> Есть методы медикаментозной коррекции, они прописаны нашими стандартами, протоколами ведения пациентов с гастроэнтерологической болезнью. Существуют согласительные документы Российской гастроэнтерологической ассоциации, хирургических сообществ по ГЭРБ. <span class="cue cue-add">+ ИПП</span> Терапия первой линии всегда является ингибитором протонной помпы, которая, кстати, продается даже без рецепта. <span class="cue cue-add">+ OTC</span> Потому что есть целый ряд препаратов в малой дозе, в ограниченном количестве, которые входят в безрецептурный отпуск. То есть OTC-отпуск, который пациенты могут приобрести в аптеке и оказывать такое самолечение, осознанное самолечение. В этом ничего плохого нет. <span class="cue cue-off">&times; ЧИСТЫЙ КАДР</span> Это как раз таки для того, чтобы у пациента было время собраться с мыслями, взять направление, прийти к гастроэнтерологу, сделать эндоскопию. И чтобы он не страдал в то время, пока идет подготовка к обследованию и уточнению диагноза.</div>
+  </div>
+  <div class="seg-right">
+    <div class="scr-label">Fullscreen 2 Points <a class="scr-link" onclick="copyLink(this)" data-id="#seg7">&#x1F517;</a></div>
+    <div class="scr-preset">Пресет AE: Fullscreen 2 Points</div>
+    <div class="variants">
+      <div class="variants-title">Варианты</div>
+      <div class="var-tabs">
+        <button class="var-tab active" onclick="switchVar(this,'seg7')">A: 2 Points</button>
+        <button class="var-tab" onclick="switchVar(this,'seg7')">B: Side Slide</button>
+      </div>
+      <div class="var-panel active" data-seg="seg7">
+        <div class="mock"><div class="m-2p"><h3>Чем лечить изжогу?</h3><div class="m-2p-cols"><div class="m-2p-col" style="border-color:rgba(224,85,85,.3);"><h4 style="color:var(--err);">Подручные</h4><p>&mdash; Сода (вредит)<br>&mdash; Мел<br>&mdash; Антациды (минуты)</p></div><div class="m-2p-col" style="border-color:rgba(74,222,128,.3);"><h4 style="color:var(--ok);">Стандарт</h4><p>&mdash; ИПП (без рецепта)<br>&mdash; Гастроэнтеролог<br>&mdash; Эндоскопия</p></div></div></div></div>
+      </div>
+      <div class="var-panel" data-seg="seg7">
+        <div class="mock"><div class="m-ss"><div class="m-ss-l"><h3>Стандарт лечения</h3><ul><li>ИПП &mdash; первая линия (РГА)</li><li>Без рецепта (OTC)</li><li>Антациды &mdash; только помощник</li><li>Цель: время до врача</li></ul></div><div class="spk" style="border-radius:0;"></div></div></div>
+      </div>
+    </div>
+    <div class="screen-text">
+      <p><b>НЕ работает (левая колонка, сразу):</b> Сода (рикошет), Мел, Антациды</p>
+      <p><b>Стандарт (правая, на "ИПП"):</b> ИПП (1-я линия, OTC) &rarr; Врач &rarr; Эндоскопия</p>
+    </div>
+  </div>
+  <div class="seg-prod">
+    <div class="prod-label">ПРОИЗВОДСТВО</div>
+    <div class="gemini"><span class="gemini-var gemini-var-a">A &mdash; СРАВНЕНИЕ 2 СТОЛБЦА</span>
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      Два столбца: красный (подручные) vs зелёный (стандарт), иконки
+      <div class="gemini-prompt">КОНТЕКСТ: Полноэкранная сравнительная инфографика для медицинского видео о ГЭРБ. Противопоставляем народные средства (плохо) и стандартное лечение (хорошо).
+
+ЗАДАНИЕ: Фон #0A1520. Два столбца на всю ширину, разделены тонкой вертикальной линией. ЛЕВЫЙ столбец (рамка #E05555, заливка rgba(224,85,85,.08)): три строки с иконками — 1) иконка коробки, 2) иконка мела/куска, 3) иконка таблетки. ПРАВЫЙ столбец (рамка #4ADE80, заливка rgba(74,222,128,.08)): три строки с иконками — 1) иконка капсулы, 2) иконка врача, 3) иконка эндоскопа. Без текста на изображении — только иконки и цветовые зоны. 3840x2160.</div>
+    </div>
+    <div class="gemini"><span class="gemini-var gemini-var-b">B &mdash; SIDE SLIDE</span>
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      Side slide 50/50: тезисы слева, спикер справа
+      <div class="gemini-prompt">КОНТЕКСТ: Side slide для медицинского видео о ГЭРБ. Левая половина — тёмная панель для тезисов, правая — спикер.
+
+ЗАДАНИЕ: Левая панель (#0F1F2D) 50% экрана. 4 строки с иконками-галочками #01E8AB. Без текста на изображении. Правая половина — placeholder для видео спикера. 3840x2160.</div>
+    </div>
+    <div class="editor-note"><b>Текст (добавить в AE поверх):</b><br>
+      A: Лев. столбец "ПОДРУЧНЫЕ СРЕДСТВА" #E05555 Bold 28px, пункты: "Сода — рикошет", "Мел — не доказано", "Антациды — минуты".<br>
+      A: Прав. столбец "СТАНДАРТ ЛЕЧЕНИЯ" #4ADE80 Bold 28px, пункты: "ИПП — 1-я линия", "Гастроэнтеролог", "Эндоскопия".<br>
+      B: "Стандарт лечения" #01E8AB Bold 24px. Пункты: "ИПП", "Без рецепта (OTC)", "Антациды — помощник", "Цель: время до врача".</div>
+    <div class="ref-block">
+      <p><b>Референсы (сравнение: народные vs стандарт):</b></p>
+      <p><a href="https://www.google.com/search?q=comparison+infographic+two+columns+dark+background+medical&tbm=isch" target="_blank">Google Images: two-column comparison infographic</a></p>
+      <p><a href="https://www.google.com/search?q=PPI+proton+pump+inhibitor+vs+antacid+infographic&tbm=isch" target="_blank">Google Images: PPI vs antacid</a></p>
+      <p>Стиль: два столбца на всю ширину экрана. Левый красноватый (подручные), правый зеленоватый (стандарт). Иконки + текст. Чёткое противопоставление.</p>
+    </div>
+    <div class="editor-note">104 сек &mdash; экран показываем только на ~50 сек (когда "стандартами, протоколами"). Хронометраж: 40 сек спикер, 15 сек экран, 49 сек спикер. Не перегружать.</div>
+  </div>
+</div>
+
+<!-- SEG 8 -->
+<div class="seg" id="seg8">
+  <div class="seg-left">
+    <div class="seg-meta">
+      <span class="seg-num">seg_008</span>
+      <span class="seg-badge" style="background:var(--warn);color:var(--bg);">Ошибка 2</span>
+      <span class="seg-tc">6:10 &ndash; 6:33</span><span class="seg-dur">23s</span>
+    </div>
+    <div class="seg-title">Осознанное самолечение OTC &mdash; допустимо</div>
+    <div class="seg-transcript"><span class="cue">&rarr; SIDE SLIDE</span> Самолечение не всегда плохо. Вот такое осознанное самолечение, когда пациент покупает препарат, <span class="cue cue-add">+ OTC</span> OTC-препарат, разрешенный к продаже, безрецептурный. <span class="cue cue-add">+ диагноз</span> И в случае переедания, каких-то нервных срывов, когда он понимает, что это кратковременное явление, <span class="cue cue-add">+ кратковременно</span> он знает свой диагноз, и он себе сам помогает преодолеть вот это обострение, очередное обострение. <span class="cue cue-off">&times; ЧИСТЫЙ КАДР</span></div>
+  </div>
+  <div class="seg-right">
+    <div class="scr-label">Side Slide &mdash; Тезисы <a class="scr-link" onclick="copyLink(this)" data-id="#seg8">&#x1F517;</a></div>
+    <div class="scr-preset">Пресет AE: Side Slide</div>
+    <div class="mock"><div class="m-ss"><div class="m-ss-l"><h3>Осознанное самолечение</h3><ul><li>OTC-препарат (без рецепта)</li><li class="dim">Знает свой диагноз</li><li class="dim">Кратковременное обострение</li><li class="dim">Мост до визита к врачу</li></ul><div class="add">Не замена обследованию!</div></div><div class="spk" style="border-radius:0;"></div></div></div>
+    <div class="screen-text">
+      <ul>
+        <li>OTC-препарат (ИПП, безрецептурный)</li>
+        <li>Знает диагноз</li>
+        <li>Кратковременное обострение</li>
+        <li>Мост до гастроэнтеролога</li>
+      </ul>
+      <p style="color:var(--err);"><b>Не замена обследованию!</b></p>
+    </div>
+  </div>
+  <div class="seg-prod">
+    <div class="prod-label">ПРОИЗВОДСТВО</div>
+    <div class="editor-note">Тезисы по одному. "OTC" сразу, "диагноз" на "знает", "кратковременно" на "кратковременное".</div>
+  </div>
+</div>
+
+<!-- ═══════════ BLOCK 5: ОШИБКА 3 ═══════════ -->
+<div class="block-sep" style="background:#EAB308;color:var(--bg);">5. Ошибка 3: Псевдоспециалисты <span class="block-dur">~111 сек</span></div>
+
+<!-- Step Cards 3 -->
+<div class="seg" id="seg-step3">
+  <div class="seg-left">
+    <div class="seg-meta"><span class="seg-num">step</span><span class="seg-badge" style="background:var(--accent);color:var(--bg);">Прогресс</span></div>
+    <div class="seg-title">Step Cards (lower third)</div>
+    <div class="seg-transcript"><span class="cue">&rarr; STEP CARDS</span> Но, конечно, еще такие крайности <span class="cue cue-off">&times; ЧИСТЫЙ КАДР</span> когда пациенты пытаются обращаться...</div>
+  </div>
+  <div class="seg-right">
+    <div class="scr-label">Step Cards <a class="scr-link" onclick="copyLink(this)" data-id="#seg-step3">&#x1F517;</a></div>
+    <div class="mock"><div class="m-steps"><div class="step-card done"><div class="step-lbl">ОШИБКА 1</div><hr class="step-sep"><div class="step-txt">Не идут к врачу</div></div><div class="step-card done"><div class="step-lbl">ОШИБКА 2</div><hr class="step-sep"><div class="step-txt">Самолечение</div></div><div class="step-card active"><div class="step-lbl">ОШИБКА 3</div><hr class="step-sep"><div class="step-txt">Псевдоспециалисты</div></div></div></div>
+  </div>
+  <div class="seg-prod">
+    <div class="prod-label">ПРОИЗВОДСТВО</div>
+    <div class="editor-note">Lower third 3&ndash;4 сек. Ошибки 1-2 с галочками, Ошибка 3 яркая.</div>
+  </div>
+</div>
+
+<!-- SEG 9 -->
+<div class="seg" id="seg9">
+  <div class="seg-left">
+    <div class="seg-meta">
+      <span class="seg-num">seg_009</span>
+      <span class="seg-badge" style="background:#EAB308;color:var(--bg);">Ошибка 3</span>
+      <span class="seg-tc">6:34 &ndash; 6:55</span><span class="seg-dur">21s</span>
+    </div>
+    <div class="seg-title">Знахари и псевдоспециалисты</div>
+    <div class="seg-transcript">Но, конечно, еще такие крайности, когда пациенты пытаются обращаться к каким-то <span class="cue">&rarr; B-ROLL</span> псевдоспециалистам без медицинского образования, знахарям, те что-то там заговаривают. Кажется, что это такое нелепое явление. Но, к сожалению, с такими явлениями мы тоже сталкиваемся. <span class="cue cue-off">&times; ЧИСТЫЙ КАДР</span></div>
+  </div>
+  <div class="seg-right">
+    <div class="scr-label">B-roll <a class="scr-link" onclick="copyLink(this)" data-id="#seg9">&#x1F517;</a></div>
+    <div class="variants">
+      <div class="variants-title">Варианты</div>
+      <div class="var-tabs">
+        <button class="var-tab active" onclick="switchVar(this,'seg9')">A: Split-screen</button>
+        <button class="var-tab" onclick="switchVar(this,'seg9')">B: Talking Head</button>
+      </div>
+      <div class="var-panel active" data-seg="seg9">
+        <div class="mock"><div class="m-broll"><div class="br-icon">&#x2697;&#xFE0F;</div><div class="br-text">Split: знахарь (мрак) vs врач (свет)</div></div></div>
+      </div>
+      <div class="var-panel" data-seg="seg9">
+        <div class="mock"><div class="m-th"><div class="spk"></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="seg-prod">
+    <div class="prod-label">ПРОИЗВОДСТВО</div>
+    <div class="gemini"><span class="gemini-var gemini-var-a">A &mdash; SPLIT-SCREEN</span>
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      Split: знахарь (мрак) vs врач (свет)
+      <div class="gemini-prompt">КОНТЕКСТ: B-roll для медицинского видео. Визуальный контраст: псевдоспециалисты vs настоящая медицина.
+
+ЗАДАНИЕ: Split-screen 50/50 с тонкой разделительной линией #01E8AB. СЛЕВА: тёмная комната, деревянный стол, горящие свечи (3-4 штуки), связки сушёных трав на верёвке, миска с непонятной жидкостью, руки "целителя" над миской. Атмосфера: мрачная, гнетущая, тёплый жёлтый свет свечей. СПРАВА: светлый современный медицинский кабинет, белые стены, LED-освещение, стол с компьютером, стетоскоп, белый халат. Контраст максимальный: тьма vs свет. Фотореалистичный стиль, shallow depth of field. Без текста на изображении. Без людей. 3840x2160.</div>
+    </div>
+    <div class="gemini"><span class="gemini-var gemini-var-b">B &mdash; ЧИСТЫЙ СПИКЕР</span>
+      Без генерации. Чистый кадр спикера.
+    </div>
+    <div class="editor-note">+ Chapter bar "ОШИБКА 3" (scr_004). B-roll на "псевдоспециалистам", 4&ndash;5 сек.<br>
+      <b>Текст (опционально в AE):</b> "ПСЕВДОСПЕЦИАЛИСТЫ" Raleway Black, #E05555, lower third.</div>
+  </div>
+</div>
+
+<!-- SEG 10 -->
+<div class="seg" id="seg10">
+  <div class="seg-left">
+    <div class="seg-meta">
+      <span class="seg-num">seg_010</span>
+      <span class="seg-badge" style="background:#EAB308;color:var(--bg);">Ошибка 3</span>
+      <span class="seg-tc">7:22 &ndash; 8:52</span><span class="seg-dur">90s</span>
+    </div>
+    <div class="seg-title">К специалисту: терапевт &rarr; гастроэнтеролог &rarr; диагностика</div>
+    <div class="seg-transcript">каждую проблему должен решать специалист. Проблемы с компьютером специалист по IT. Проблема с организацией пространства специалист-планировщик. <span class="cue">&rarr; ЭКРАН</span> Проблема со здоровьем кому нужно идти? К врачу. <span class="cue cue-add">+ терапевт</span> Проблема с изжогой кто может помочь решить эту проблему? Конечно, врач первого контакта это терапевт. Терапевты очень хорошо владеют технологией, связанной с оказанием медицинской помощи при гастроэзофагиальной рефлюксной болезни. <span class="cue cue-add">+ гастро</span> Ну и более сложные случаи, потому что бывают случаи упорной изжоги, когда стандартная терапия работать. <span class="cue cue-add">+ диагностика</span> И в ряде случаев нам приходится проводить дифференциальную диагностику между истинной гастроэзофагиальной рефлюксной болезнью и другими заболеваниями, которые могут быть похожи, могут симулировать гастроэзофагиальную рефлюксную болезнь, вплоть до психологических проблем. <span class="cue cue-off">&times; ЧИСТЫЙ КАДР</span> То есть пациенты могут надумывать себе изжогу и доводить себя просто до крайности, впадать в депрессию от того, что они испытывают так называемую псевдоизжогу. А это связано с избыточной чувствительностью пищевода. И в этом случае, как это ни кажется парадоксально, изжога купируется психотропными препаратами. Поэтому очень много разных нюансов. И самое важное найти специалиста, который, первое, хорошо ориентируется в этой проблеме, а второе, не менее важное, которому вы поверите.</div>
+  </div>
+  <div class="seg-right">
+    <div class="scr-label">Fullscreen Visual Demo <a class="scr-link" onclick="copyLink(this)" data-id="#seg10">&#x1F517;</a></div>
+    <div class="variants">
+      <div class="variants-title">Варианты</div>
+      <div class="var-tabs">
+        <button class="var-tab active" onclick="switchVar(this,'seg10')">A: Маршрут</button>
+        <button class="var-tab" onclick="switchVar(this,'seg10')">B: Step Cards</button>
+      </div>
+      <div class="var-panel active" data-seg="seg10">
+        <div class="mock"><div class="m-fp">
+          <div style="display:flex;flex-direction:column;align-items:center;"><div class="fp-node" style="border-color:var(--ok);color:var(--ok);">Терапевт</div><div class="fp-sub">1-й контакт</div></div>
+          <div class="fp-arrow">&rarr;</div>
+          <div style="display:flex;flex-direction:column;align-items:center;"><div class="fp-node" style="border-color:var(--accent2);color:var(--accent2);">Гастро-<br>энтеролог</div><div class="fp-sub">сложные случаи</div></div>
+          <div class="fp-arrow">&rarr;</div>
+          <div style="display:flex;flex-direction:column;align-items:center;"><div class="fp-node" style="border-color:var(--purple);color:var(--purple);">Диагнос-<br>тика</div><div class="fp-sub">ГЭРБ / изжога /<br>псевдоизжога</div></div>
+        </div></div>
+      </div>
+      <div class="var-panel" data-seg="seg10">
+        <div class="mock"><div class="m-ig"><div class="ig-row"><div class="ig-card"><div class="ig-box" style="border-color:rgba(74,222,128,.3);">&#x1FA7A;</div><div class="ig-label">Терапевт</div></div><div class="ig-card"><div class="ig-box" style="border-color:rgba(41,166,203,.3);">&#x1F52C;</div><div class="ig-label">Гастро-<br>энтеролог</div></div><div class="ig-card"><div class="ig-box" style="border-color:rgba(107,92,231,.3);">&#x1F9EA;</div><div class="ig-label">Обследо-<br>вание</div></div></div></div></div>
+      </div>
+    </div>
+    <div class="screen-text">
+      <p><b>Маршрут пациента:</b></p>
+      <ul>
+        <li><span class="vc-fact">Терапевт</span> &mdash; первый контакт</li>
+        <li><span class="vc-fact">Гастроэнтеролог</span> &mdash; сложные случаи</li>
+        <li><span class="vc-fact">Диагностика</span> &mdash; ГЭРБ / функц. изжога / псевдоизжога</li>
+      </ul>
+      <p><b>Финал:</b> "Найти специалиста, которому вы поверите."</p>
+    </div>
+  </div>
+  <div class="seg-prod">
+    <div class="prod-label">ПРОИЗВОДСТВО</div>
+    <div class="gemini"><span class="gemini-var gemini-var-a">A &mdash; МАРШРУТ (FLOWCHART)</span>
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      3 узла слева направо + ветвление, стрелки
+      <div class="gemini-prompt">КОНТЕКСТ: Маршрутная карта пациента для медицинского видео о ГЭРБ. Показываем путь от первого визита до диагностики.
+
+ЗАДАНИЕ: Фон #0A1520. Три узла-прямоугольника 180x120px слева направо, соединены толстыми стрелками #01E8AB. 1) Зелёный узел (#4ADE80), 2) Голубой узел (#29A6CB), 3) Фиолетовый узел (#6B5CE7). Под узлом 3 — три ветки вниз тонкими линиями к трём маленьким блокам. Без текста на изображении — только цветные формы и стрелки. 3840x2160.</div>
+    </div>
+    <div class="gemini"><span class="gemini-var gemini-var-b">B &mdash; ИКОНКИ-КАРТОЧКИ</span>
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      3 иконки с цветными рамками
+      <div class="gemini-prompt">КОНТЕКСТ: Три этапа маршрута пациента для медицинского видео.
+
+ЗАДАНИЕ: Фон #0A1520. Три карточки в ряд: 1) иконка стетоскопа в зелёной рамке (#4ADE80), 2) иконка микроскопа в голубой рамке (#29A6CB), 3) иконка пробирки в фиолетовой рамке (#6B5CE7). Карточки с закруглёнными углами, тёмный фон внутри. Без текста на изображении. 3840x2160.</div>
+    </div>
+    <div class="editor-note"><b>Текст (добавить в AE поверх):</b><br>
+      A: Узел 1 "Терапевт" #4ADE80 Bold 28px, мелко "1-й контакт". Узел 2 "Гастроэнтеролог" #29A6CB. Узел 3 "Диагностика" #6B5CE7. Ветки: "ГЭРБ", "Функц. изжога", "Псевдоизжога" Light 16px.<br>
+      B: Под иконками: "Терапевт", "Гастроэнтеролог", "Обследование" Bold 16px.</div>
+    <div class="ref-block">
+      <p><b>Референсы (маршрут пациента):</b></p>
+      <p><a href="https://www.google.com/search?q=patient+pathway+flowchart+dark+background+medical&tbm=isch" target="_blank">Google Images: patient pathway flowchart</a></p>
+      <p><a href="https://www.google.com/search?q=referral+chain+therapist+specialist+diagnosis+infographic&tbm=isch" target="_blank">Google Images: referral chain infographic</a></p>
+      <p>Стиль: 3 узла слева направо, стрелки между ними. Под последним узлом &mdash; ветвление на 3 варианта диагноза. Как flowchart, но красивый и минималистичный.</p>
+    </div>
+    <div class="editor-note">Экран на "К врачу". Узлы по одному. Убрать перед "самое важное найти" &mdash; финал на чистом спикере.</div>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  <div style="margin-bottom:16px;">powered by <a href="https://rya.ae/" target="_blank">RYA.AE</a></div>
+  <div style="font-size:13px;color:var(--white);font-weight:600;margin-bottom:4px;">Roman Sergeev</div>
+  <div style="font-size:12px;color:var(--muted);">Producer</div>
+  <div style="display:flex;gap:16px;justify-content:center;margin-top:8px;font-size:12px;">
+    <a href="https://t.me/sergeevr" target="_blank" style="color:var(--accent2);text-decoration:none;">Telegram: @sergeevr</a>
+    <a href="https://wa.me/971569399953" target="_blank" style="color:var(--accent2);text-decoration:none;">WhatsApp: +971 56 939 9953</a>
+    <a href="mailto:rs@rya.ae?subject=YTRF02%20Screen%20Plan%20v3%20%E2%80%94%203%20%D0%BE%D1%88%D0%B8%D0%B1%D0%BA%D0%B8%20%D0%BF%D0%B0%D1%86%D0%B8%D0%B5%D0%BD%D1%82%D0%BE%D0%B2" style="color:var(--accent2);text-decoration:none;">Email: rs@rya.ae</a>
+  </div>
+</div>
+
+<script>
+function copyLink(el){
+  const id=el.getAttribute('data-id');
+  const url=window.location.href.split('#')[0]+id;
+  navigator.clipboard.writeText(url).then(()=>{
+    el.classList.add('copied');
+    el.textContent='\u2713 copied';
+    setTimeout(()=>{el.classList.remove('copied');el.innerHTML='&#x1F517;';},1500);
+  });
+}
+function switchVar(btn,segId){
+  const seg=document.getElementById(segId);if(!seg)return;
+  const right=seg.querySelector('.seg-right');
+  const tabs=right.querySelectorAll('.var-tab');
+  const panels=right.querySelectorAll('.var-panel');
+  const idx=Array.from(tabs).indexOf(btn);
+  tabs.forEach(t=>t.classList.remove('active'));
+  panels.forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  if(panels[idx])panels[idx].classList.add('active');
+}
+function downloadBlob(path){
+  const fname=path.split('/').pop();
+  fetch(path).then(r=>r.blob()).then(blob=>{
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;a.download=fname;
+    document.body.appendChild(a);a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }).catch(()=>{});
+}
+function copyRefPath(el,path){
+  const pagePath=decodeURIComponent(window.location.pathname);
+  const dir=pagePath.substring(0,pagePath.lastIndexOf('/')+1);
+  navigator.clipboard.writeText(dir+path);
+  window.open(path,'_blank');
+  downloadBlob(path);
+  const orig=el.innerHTML;
+  el.classList.add('copied');el.textContent='\u2B07 Downloading...';
+  setTimeout(()=>{el.classList.remove('copied');el.innerHTML=orig;},1500);
+}
+function copyFrame(btn){
+  const container=btn.closest('.gemini');
+  const prompt=container&&container.querySelector('.gemini-prompt');
+  if(!prompt)return;
+  navigator.clipboard.writeText(prompt.textContent.trim()).then(()=>{
+    btn.classList.add('copied');btn.textContent='Copied!';
+    setTimeout(()=>{btn.classList.remove('copied');btn.textContent='Copy';},1500);
+  });
+}
+// Click ref-img → open in new tab + download
+document.querySelectorAll('.ref-img').forEach(img=>{
+  img.addEventListener('click',()=>{
+    window.open(img.src,'_blank');
+    downloadBlob(img.getAttribute('src'));
+  });
+});
+// file:// warning banner
+if(location.protocol==='file:'){
+  const b=document.createElement('div');
+  const cmd="python3 -m http.server 8080 -d '"+decodeURIComponent(location.pathname).replace(/\/[^/]+$/,'')+"'";
+  b.innerHTML='<div style="position:fixed;bottom:0;left:0;right:0;z-index:999;background:rgba(245,158,11,.95);color:#000;padding:10px 20px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:12px;justify-content:center;font-family:Montserrat,sans-serif;">file:// \u2014 \u0441\u043a\u0430\u0447\u0438\u0432\u0430\u043d\u0438\u0435 \u0437\u0430\u0431\u043b\u043e\u043a\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u043e\u043c. \u041e\u0442\u043a\u0440\u043e\u0439\u0442\u0435 \u0447\u0435\u0440\u0435\u0437 localhost: <code style="background:rgba(0,0,0,.15);padding:4px 10px;border-radius:5px;font-size:12px;cursor:pointer;user-select:all;" onclick="navigator.clipboard.writeText(\''+cmd.replace(/'/g,"\\'")+'\');this.style.background=\'rgba(0,200,0,.3)\';this.textContent=\'Copied!\'">'+cmd.replace(/</g,'&lt;')+'</code> \u0437\u0430\u0442\u0435\u043c <a href="http://localhost:8080/'+location.pathname.split('/').pop()+'" style="color:#000;text-decoration:underline;font-weight:800;">localhost:8080</a></div>';
+  document.body.appendChild(b);
+}
+</script>
+</body>
+</html>
