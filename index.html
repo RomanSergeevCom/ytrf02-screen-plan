@@ -174,6 +174,15 @@
   .kling::before{content:"KLING PROMPT";display:block;font-size:9px;font-weight:700;color:var(--warn);margin-bottom:4px;letter-spacing:1px}
   .kling-prompt{display:block;margin-top:8px;padding:10px 14px;background:rgba(0,0,0,.15);border-radius:6px;font-size:11px;color:rgba(255,220,150,.9);line-height:1.7;white-space:pre-wrap;cursor:text;user-select:text}
 
+  .asset-block{background:rgba(74,222,128,.06);border:2px solid rgba(74,222,128,.25);border-radius:10px;padding:14px;margin-top:10px}
+  .asset-block::before{content:"ГОТОВЫЕ АССЕТЫ";display:block;font-size:9px;font-weight:700;color:var(--ok);margin-bottom:8px;letter-spacing:1px}
+  .asset-grid{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .asset-grid img{height:80px;border-radius:6px;border:1px solid var(--border);cursor:pointer}
+  .asset-grid img:hover{border-color:var(--ok)}
+  .asset-file{font-size:11px;color:rgba(255,255,255,.7);padding:2px 0}
+  .asset-file b{color:var(--ok)}
+  .asset-file code{font-size:10px;color:var(--muted)}
+
   .screen-text{background:rgba(1,232,171,.05);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:12px}
   .screen-text::before{content:"ТЕКСТ НА ЭКРАНЕ";display:block;font-size:9px;font-weight:700;color:var(--accent);margin-bottom:6px;letter-spacing:1px}
   .screen-text p{font-size:12px;color:rgba(255,255,255,.8);line-height:1.6;margin-bottom:4px}
@@ -653,6 +662,16 @@
       <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
       <div class="kling-prompt">A medical illustration of an esophagus and stomach in vertical cross-section on a dark background. The esophagus slowly transforms through 5 stages of disease: starts healthy (smooth pink walls, green outline) → inflammation appears (red spots on the wall, yellow outline) → the lumen narrows with scar tissue (orange outline) → cells change color showing pre-cancer (red outline, a magnifying circle appears on the side) → a dark red tumor mass grows in the wall, almost blocking the lumen (dark red outline). The transformation is smooth and continuous, like a time-lapse. Camera is static. Minimalist medical illustration style. 5 seconds.</div>
     </div>
+
+    <div class="asset-block">
+      <div class="asset-grid">
+        <img src="assets/seg_004/seg_004_frame1_healthy.png" alt="Кадр 1" onclick="window.open(this.src,'_blank')">
+        <img src="assets/seg_004/seg_004_frame2_inflammation.png" alt="Кадр 2" onclick="window.open(this.src,'_blank')">
+        <img src="assets/seg_004/seg_004_frame3_precancer.png" alt="Кадр 3" onclick="window.open(this.src,'_blank')">
+        <img src="assets/seg_004/seg_004_frame4_cancer.png" alt="Кадр 4" onclick="window.open(this.src,'_blank')">
+      </div>
+      <div class="asset-file"><b>Видео:</b> <code>Assets/Graphics/seg_004/seg_004_kling_morphing.mp4</code> &mdash; морфинг 5 стадий, 5 сек. Импорт в Premiere на таймлайн seg_004.</div>
+    </div>
   </div>
 </div>
 
@@ -753,6 +772,14 @@
       &mdash; "Желчь" рядом с жёлто-зелёной стрелкой<br>
       &mdash; "Ферменты" рядом с оранжевой стрелкой<br>
       &mdash; "Повреждение" #E05555 Bold 28px у зоны покраснения</div>
+
+    <div class="asset-block">
+      <div class="asset-grid">
+        <img src="assets/seg_005/seg_005_closed.png" alt="Норма" onclick="window.open(this.src,'_blank')">
+        <img src="assets/seg_005/seg_005_reflux.png" alt="Рефлюкс" onclick="window.open(this.src,'_blank')">
+      </div>
+      <div class="asset-file"><b>Видео:</b> <code>Assets/Graphics/seg_005/seg_005_kling_reflux.mp4</code> &mdash; сфинктер раскрывается, рефлюкс, 5 сек. На таймлайн seg_005.</div>
+    </div>
   </div>
 </div>
 
@@ -801,6 +828,13 @@
 ЗАДАНИЕ: Фотореалистичная сцена на кухонном столе. В центре — красно-жёлтая пачка российской пищевой соды (прямоугольная коробка, жёлто-красная упаковка). Рядом — стакан воды, чайная ложка с горкой белого порошка. Тёплый боковой свет из окна, деревянная столешница. Стиль: документальная фотография, slightly desaturated, shallow depth of field (f/2.8). Настроение: ностальгия. Без людей в кадре. Без текста на изображении. 3840x2160.</div>
     </div>
     <div class="editor-note">+ Chapter bar "ОШИБКА 2" (scr_003). B-roll на "соду", 4&ndash;5 сек.</div>
+
+    <div class="asset-block">
+      <div class="asset-grid">
+        <img src="assets/seg_006/seg_006_broll_soda.png" alt="Сода" onclick="window.open(this.src,'_blank')">
+      </div>
+      <div class="asset-file"><b>Видео:</b> <code>Assets/Graphics/seg_006/seg_006_kling_soda.mp4</code> &mdash; анимация соды, 5 сек. B-roll на "соду".</div>
+    </div>
   </div>
 </div>
 
@@ -976,6 +1010,14 @@
     <div class="editor-note" style="margin-top:10px;"><b>Текст (добавить в AE поверх):</b><br>
       Видео 1: "ПСЕВДОСПЕЦИАЛИСТЫ" Raleway Black, #E05555, lower third, fade in 1 сек<br>
       Видео 2: без текста — контраст говорит сам</div>
+
+    <div class="asset-block">
+      <div class="asset-grid">
+        <img src="assets/seg_009/seg_009_esoteric.png" alt="Эзотерик" onclick="window.open(this.src,'_blank')">
+        <img src="assets/seg_009/seg_009_doctor.png" alt="Врач" onclick="window.open(this.src,'_blank')">
+      </div>
+      <div class="asset-file"><b>Видео:</b> <code>Assets/Graphics/seg_009/seg_009_kling_transition.mp4</code> &mdash; морфинг эзотерик &rarr; врач, 5 сек. B-roll на "псевдоспециалистам".</div>
+    </div>
   </div>
 </div>
 
