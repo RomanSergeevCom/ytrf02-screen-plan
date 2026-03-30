@@ -170,6 +170,9 @@
   .gemini-prompt{display:block;margin-top:8px;padding:10px 14px;background:rgba(0,0,0,.15);border-radius:6px;font-size:11px;color:rgba(200,180,255,.9);line-height:1.7;white-space:pre-wrap;cursor:text;user-select:text}
   .sb-arrow{display:flex;align-items:center;gap:8px;padding:6px 0 6px 12px;font-size:10px;font-weight:700;color:var(--purple);letter-spacing:.5px}
   .sb-arrow::before{content:"\2193";font-size:16px}
+  .kling{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:8px;padding:10px 14px;font-size:12px;color:rgba(255,220,150,.85);line-height:1.5;margin-top:10px;position:relative}
+  .kling::before{content:"KLING PROMPT";display:block;font-size:9px;font-weight:700;color:var(--warn);margin-bottom:4px;letter-spacing:1px}
+  .kling-prompt{display:block;margin-top:8px;padding:10px 14px;background:rgba(0,0,0,.15);border-radius:6px;font-size:11px;color:rgba(255,220,150,.9);line-height:1.7;white-space:pre-wrap;cursor:text;user-select:text}
 
   .screen-text{background:rgba(1,232,171,.05);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:12px}
   .screen-text::before{content:"ТЕКСТ НА ЭКРАНЕ";display:block;font-size:9px;font-weight:700;color:var(--accent);margin-bottom:6px;letter-spacing:1px}
@@ -646,7 +649,10 @@
       Кадр 4: "Предрак" #E05555 Bold 48px, мелко "(пищевод Барретта)"<br>
       Кадр 5: "РАК" #DC2626 Black 72px, мелко "(аденокарцинома)"<br>
       Шрифт: Raleway. Позиция: внизу или сбоку, не перекрывая иллюстрацию.</div>
-    <div class="sb-kling"><b>Kling:</b> кадры 1&rarr;5, 5 сек, морфинг.</div>
+    <div class="kling"><span style="color:var(--warn);font-weight:700;">ВИДЕО</span> &mdash; морфинг 5 стадий (из Кадров 1-5)
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      <div class="kling-prompt">A medical illustration of an esophagus and stomach in vertical cross-section on a dark background. The esophagus slowly transforms through 5 stages of disease: starts healthy (smooth pink walls, green outline) → inflammation appears (red spots on the wall, yellow outline) → the lumen narrows with scar tissue (orange outline) → cells change color showing pre-cancer (red outline, a magnifying circle appears on the side) → a dark red tumor mass grows in the wall, almost blocking the lumen (dark red outline). The transformation is smooth and continuous, like a time-lapse. Camera is static. Minimalist medical illustration style. 5 seconds.</div>
+    </div>
   </div>
 </div>
 
@@ -940,18 +946,41 @@
   </div>
   <div class="seg-prod">
     <div class="prod-label">ПРОИЗВОДСТВО</div>
-    <div class="gemini"><span class="gemini-var gemini-var-a">A &mdash; SPLIT-SCREEN</span>
-      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
-      Split: знахарь (мрак) vs врач (свет)
-      <div class="gemini-prompt">КОНТЕКСТ: B-roll для медицинского видео. Визуальный контраст: псевдоспециалисты vs настоящая медицина.
+    <div class="editor-note">+ Chapter bar "ОШИБКА 3" (scr_004). B-roll на "псевдоспециалистам", 4&ndash;5 сек. Монтаж: сначала видео "целитель", потом резкий cut на видео "врач".</div>
 
-ЗАДАНИЕ: Split-screen 50/50 с тонкой разделительной линией #01E8AB. СЛЕВА: тёмная комната, деревянный стол, горящие свечи (3-4 штуки), связки сушёных трав на верёвке, миска с непонятной жидкостью, руки "целителя" над миской. Атмосфера: мрачная, гнетущая, тёплый жёлтый свет свечей. СПРАВА: светлый современный медицинский кабинет, белые стены, LED-освещение, стол с компьютером, стетоскоп, белый халат. Контраст максимальный: тьма vs свет. Фотореалистичный стиль, shallow depth of field. Без текста на изображении. Без людей. 3840x2160.</div>
+    <div style="font-size:10px;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">A &mdash; ОДНА ДЕВУШКА В ДВУХ ОБРАЗАХ (2 картинки Gemini &rarr; 2 видео Kling)</div>
+
+    <div class="gemini"><span class="gemini-var gemini-var-a">КАРТИНКА 1</span> &mdash; ЦЕЛИТЕЛЬ (мрак)
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      <div class="gemini-prompt">Фотореалистичный портрет молодой женщины 30-35 лет, славянская внешность, тёмные волосы собраны, серьёзное выражение лица. Она сидит за деревянным столом в тёмной комнате. На столе: горящие свечи (3-4 штуки), связки сушёных трав, глиняная миска с мутной жидкостью, старые книги. Её руки над миской в жесте "заговора". Одета в тёмную бесформенную одежду, платок на плечах. Освещение: только свечи — тёплый жёлтый свет, глубокие тени на лице. Атмосфера мрачная, гнетущая. Стиль: кинематографический, shallow depth of field (f/1.8), цветовая температура 2700K. 3840x2160.</div>
     </div>
+
+    <div class="sb-arrow">приложи Картинку 1 и попроси изменить</div>
+
+    <div class="gemini"><span class="gemini-var gemini-var-a">КАРТИНКА 2</span> &mdash; ТА ЖЕ ДЕВУШКА &mdash; ВРАЧ (свет)
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      <div class="gemini-prompt">Прикладываю предыдущую картинку.
+
+Это ТА ЖЕ женщина — сохрани её лицо, черты, возраст, цвет волос. Но теперь она врач. Волосы аккуратно убраны. Белый медицинский халат, стетоскоп на шее. Она сидит за столом в светлом современном медицинском кабинете: белые стены, LED-освещение, монитор компьютера, медицинские папки. Выражение лица спокойное, профессиональное, уверенное. Освещение: яркий дневной свет, чистота и порядок. Стиль: кинематографический, shallow depth of field (f/1.8), цветовая температура 5500K. Контраст с предыдущей картинкой максимальный: тьма → свет. 3840x2160.</div>
+    </div>
+
+    <div class="kling"><span style="color:var(--warn);font-weight:700;">ВИДЕО 1</span> &mdash; ЦЕЛИТЕЛЬ (из Картинки 1)
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      <div class="kling-prompt">A woman sits at a wooden table in a dark room lit only by candles. She slowly moves her hands over a clay bowl with a murky liquid, performing a ritual gesture. Dried herbs sway slightly. Candle flames flicker. Camera slowly pushes in on her face — serious, intense expression. Cinematic look, warm 2700K light, deep shadows. 5 seconds.</div>
+    </div>
+
+    <div class="kling"><span style="color:var(--warn);font-weight:700;">ВИДЕО 2</span> &mdash; ВРАЧ (из Картинки 2)
+      <button class="sb-copy-btn" onclick="copyFrame(this)" style="float:right;margin:0 0 4px 8px;">Copy</button>
+      <div class="kling-prompt">The same woman, now a doctor in a white coat with a stethoscope, sits at a desk in a bright modern medical office. She calmly looks at a computer monitor, then turns toward the camera with a confident, professional smile. Bright daylight, clean white walls, LED lighting. Camera slowly pushes in. Cinematic look, 5500K light. 5 seconds.</div>
+    </div>
+
     <div class="gemini"><span class="gemini-var gemini-var-b">B &mdash; ЧИСТЫЙ СПИКЕР</span>
       Без генерации. Чистый кадр спикера.
     </div>
-    <div class="editor-note">+ Chapter bar "ОШИБКА 3" (scr_004). B-roll на "псевдоспециалистам", 4&ndash;5 сек.<br>
-      <b>Текст (опционально в AE):</b> "ПСЕВДОСПЕЦИАЛИСТЫ" Raleway Black, #E05555, lower third.</div>
+
+    <div class="editor-note" style="margin-top:10px;"><b>Текст (добавить в AE поверх):</b><br>
+      Видео 1: "ПСЕВДОСПЕЦИАЛИСТЫ" Raleway Black, #E05555, lower third, fade in 1 сек<br>
+      Видео 2: без текста — контраст говорит сам</div>
   </div>
 </div>
 
@@ -1082,8 +1111,8 @@ function copyRefPath(el,path){
   setTimeout(()=>{el.classList.remove('copied');el.innerHTML=orig;},1500);
 }
 function copyFrame(btn){
-  const container=btn.closest('.gemini');
-  const prompt=container&&container.querySelector('.gemini-prompt');
+  const container=btn.closest('.gemini')||btn.closest('.kling');
+  const prompt=container&&(container.querySelector('.gemini-prompt')||container.querySelector('.kling-prompt'));
   if(!prompt)return;
   navigator.clipboard.writeText(prompt.textContent.trim()).then(()=>{
     btn.classList.add('copied');btn.textContent='Copied!';
