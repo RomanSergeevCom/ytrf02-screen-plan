@@ -294,6 +294,65 @@
   <span class="cue cue-off">&times; ЧИСТЫЙ КАДР</span> убрать, вернуть спикера
 </div>
 
+<!-- ═══════════ PROJECT STRUCTURE ═══════════ -->
+<details style="background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px 20px;margin-bottom:24px;cursor:pointer;">
+  <summary style="font-size:12px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;list-style:none;display:flex;align-items:center;gap:8px;">
+    <span style="font-size:16px;">&#x1F4C1;</span> Структура проекта (для монтажёра)
+  </summary>
+  <pre style="margin-top:14px;font-size:12px;line-height:1.8;color:rgba(255,255,255,.75);font-family:'Montserrat',monospace;overflow-x:auto;"><code>YTRF02_Bakulina_3_Patient_Mistakes/
+└── 01_Media/
+    ├── <b style="color:var(--accent2);">YTRF02_Bakulina_3_Patient_Mistakes.prproj</b>  ← Premiere проект
+    │
+    ├── <b style="color:var(--ok);">Assets/</b>                          ← АССЕТЫ ДЛЯ МОНТАЖА
+    │   ├── Graphics/
+    │   │   ├── <b>seg_004/</b>              ← Прогрессия: изжога → рак
+    │   │   │   ├── seg_004_frame1_healthy.png
+    │   │   │   ├── seg_004_frame2_inflammation.png
+    │   │   │   ├── seg_004_frame3_precancer.png
+    │   │   │   ├── seg_004_frame4_cancer.png
+    │   │   │   └── <b style="color:var(--warn);">seg_004_kling_morphing.mp4</b>
+    │   │   ├── <b>seg_005/</b>              ← Механизм рефлюкса
+    │   │   │   ├── seg_005_closed.png
+    │   │   │   ├── seg_005_reflux.png
+    │   │   │   └── <b style="color:var(--warn);">seg_005_kling_reflux.mp4</b>
+    │   │   ├── <b>seg_006/</b>              ← B-roll сода
+    │   │   │   ├── seg_006_broll_soda.png
+    │   │   │   └── <b style="color:var(--warn);">seg_006_kling_soda.mp4</b>
+    │   │   └── <b>seg_009/</b>              ← Знахарь vs врач
+    │   │       ├── seg_009_esoteric.png
+    │   │       ├── seg_009_doctor.png
+    │   │       └── <b style="color:var(--warn);">seg_009_kling_transition.mp4</b>
+    │   ├── Fonts/
+    │   ├── Music/
+    │   ├── SFX/
+    │   └── Stock/
+    │
+    ├── <b style="color:var(--accent2);">Source/</b>                          ← ИСХОДНИКИ
+    │   ├── Video/
+    │   │   └── RYA-ZVE1-1371.MP4     ← камера (интервью)
+    │   ├── Audio/                     ← (внешний звук, если есть)
+    │   ├── LUT/
+    │   │   ├── bright.cube
+    │   │   ├── dark.cube
+    │   │   └── normal.cube
+    │   ├── Transcription/
+    │   │   ├── YTRF02_transcript.json
+    │   │   ├── YTRF02_transcript.srt
+    │   │   └── captions/ transcripts/ per_clip/
+    │   └── Setup/
+    │       ├── YTRF02_ingest.json
+    │       ├── YTRF02_Claude4_assembly.json
+    │       ├── Assembly/
+    │       │   ├── YTRF02_Assembly_v5_in.json  ← текущий бриф
+    │       │   └── YTRF02_review_v5.html
+    │       └── <b style="color:var(--ok);">Pre-Edit/</b>
+    │           ├── <b style="color:var(--accent);">YTRF02_screen_plan_v3.html</b>  ← ВЫ ЗДЕСЬ
+    │           ├── ref_images/         ← референсы для Gemini
+    │           └── open_screen_plan.command
+    │
+    └── 99_Pipeline/                    ← (служебное)</code></pre>
+</details>
+
 <div class="legend">
   <div class="leg-item"><div class="leg-dot" style="background:var(--ok)"></div> Hook / Представление</div>
   <div class="leg-item"><div class="leg-dot" style="background:var(--err)"></div> Ошибка 1</div>
